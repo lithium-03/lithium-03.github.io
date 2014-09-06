@@ -136,7 +136,7 @@ function initCounters(a) {
             time = cur - startTime;
             time = Math.floor(time / 1000) < 120 ? 120 - Math.floor(time / 1000) : 0;
             if (time == 0)
-                $(window).trigger('gameOver');
+                $("#nil").trigger('click');
             return time;
         }
     });

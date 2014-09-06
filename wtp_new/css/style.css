@@ -29,11 +29,12 @@ a
 }
 #hometitle
 {
-    background-color:#CCB04D;
+    background-color:#FFC77A;
     width:200%;
     color:#505050;
     font-size:xx-large;
     font-weight:bold;
+    font-family: 'Montserrat', sans-serif;
     padding:10px;
     text-transform:capitalize;
 }
@@ -51,7 +52,7 @@ a
 }
 .gameitem:nth-of-type(2n+1)
 {
-    background-color:#FFC77A;
+    background-color:#CCB04D;
 }
 .gameitem:nth-of-type(2n+2)
 {
@@ -88,7 +89,7 @@ a
 }
 .menuitem:nth-of-type(2n+1)
 {
-    background-color:#FFC77A;
+    background-color:#CCB04D;
 }
 .menuitem:nth-of-type(2n+2)
 {

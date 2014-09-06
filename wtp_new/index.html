@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="css/style.css"/>
     <link rel="stylesheet" href="jquery.flipcountdown.css" />
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
-    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Amatic+SC:700'>
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Amatic+SC:700' />
+    <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Montserrat:700' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
     <script src="js/ui.js"></script>
@@ -16,16 +17,15 @@
     <script src="js/cookiecontrol.js"></script>
     <script src="js/jquery.nicescroll.min.js"></script>
     <script src="js/jquery.flipcountdown.js"></script>
-    <script src="js/jquery.keycombo.js"></script>
-    <title>
-        Where's the Pie?
-    </title>
+    <!--<script src="js/jquery.keycombo.js"></script>-->
+    <title>Pie?</title>
 </head>
 <body onmousewheel="return false;">
     <div id="pagecontainer">
         <div id="homepage" class="page">
             <div id="hometitle">
-                Where's the pie?
+                <div style="width:50%;text-align:center">Pie?</div>
+                
             </div>
             <div id="menubar">
                 <a class="menuitem" href="#gamepage" onclick="newGame();">
@@ -46,7 +46,16 @@
             </div>
             <div id="contentblock">
                 <div id="instructions">
-                    Chef DePie's stupid waiters have managed to misplace a large number of pies inside his restaurant. <br /> The customers are waiting. Use WASD or arrows or on-screen buttons to move DePie.<br /> Find as many pies as you can as they appear before the timer runs out. <br /><br />Time Bonus: Every 3 pies served will convince your customers to wait another some more and will add 1 second to the clock.<br /><br /> Each pie gives a base score of 6 points.<br /><br />Perfect Catch:Follow a path of shortest number of steps for a perfect catch.<br /><br />Score Bonus:Combo perfect catches add bonus points to the scoreboard. <br /><br /> Score penalty: Imperfect catches gives a penalty of 1 point per extra step till point to be awarded becomes zero and also resets combo meter.<br /><br /> Pause: To pause game press Alt or switch to another tab or window.
+                    Chef DePie's stupid waiters have managed to misplace a large number of pies inside his restaurant. <br /> 
+                    The customers are waiting. 
+                    <strong>Use WASD or arrows or on-screen buttons to move the chef.</strong> <br /> 
+                    Find as many pies as you can as they appear before the timer runs out. <br /><br />
+                    <strong>Time bonus</strong>:Every 3 pies served will convince your customers to wait another some more and will add 1 second to the clock.<br /><br /> 
+                    Each pie gives a base score of 6 points.<br /><br />
+                    <strong>Perfect Catch</strong>:Follow a path of shortest number of steps for a perfect catch.<br /><br />
+                    <strong>Score Bonus</strong>:Combo perfect catches add bonus points to the scoreboard. <br /><br /> 
+                    <strong>Score penalty</strong>: Imperfect catches gives a penalty of 1 point per extra step till point to be awarded becomes zero and also resets combo meter.<br /><br /> 
+                    Pause: To pause game press Alt or switch to another tab or window.
                 </div>
                 <div id="statsblock"></div> 
             </div>
@@ -124,6 +133,7 @@
                 </div>
             </div>
         </div>
+        <div id="nil" onclick="endGame();"></div>
     </div>
 </body>
 </html>
