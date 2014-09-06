@@ -161,11 +161,11 @@ a
 }
 #chef
 {
-    background:url(/img/chef.png);
+    background:url(../img/chef.png);
 }
 #pie
 {
-    background:url(/img/pie.png);
+    background:url(../img/pie.png);
 }
 #chef,#pie
 {
