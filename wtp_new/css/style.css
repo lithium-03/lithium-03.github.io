@@ -145,7 +145,7 @@ a
 {
     border:3px solid white;
     border-radius:3px;
-    background:url(/img/restaurant.png);
+    background:url(../img/restaurant.png);
     background-position:center;
     background-size:contain;
     background-repeat:no-repeat;
