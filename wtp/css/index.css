@@ -1,0 +1,144 @@
+body
+{
+    background-color:#00aca6 !important;
+    font-family:'Segoe UI';
+}
+a,a:visited
+{
+    color:black;
+}
+#homepage,#gamepage
+{
+    display:inline-block;
+    vertical-align:top;
+    width:100%;
+    min-height:100%;
+}
+#homepage
+{
+    float:left;
+}
+#gamepage
+{
+    float:right;
+}
+.dialog1
+{
+    position:fixed;
+    top:20%;
+    left:10%;
+    width:80%;
+    font-family:'Segoe UI';
+    background-color:rgba(128, 128, 128,0.9);
+    z-index:10;
+    visibility:hidden;
+}
+#dialog
+{
+    height:75%;
+}
+#dialogstat
+{
+    height:65%;
+}
+#score
+{
+    width:100%;
+}
+#time
+{
+    width:100%;
+}
+img.tile 
+{       
+      width: 23% !important;
+      height: auto !important;
+      outline:2px solid #b56d6d;
+      margin:1px;
+}
+#matrix
+{
+    width:50%;
+}
+.header 
+{
+    width:100%;
+    margin-top:25px;
+    text-align: center !important;
+}
+.back
+{
+    width:15%;
+    height:auto;
+    position:fixed;
+    top:4%;
+    left:5%;
+}
+.game
+{
+    font-weight:bold;
+    cursor:pointer;
+    min-width:300px;
+    max-width:1500px;
+    min-height:80px;
+    max-height:500px;
+}
+#stat
+{
+    top:55%;
+}
+#bk
+{
+    top:70%; 
+}
+#new
+{
+    top:25%;
+}
+#ins
+{
+    top:40%
+}
+img.flop
+{
+    width:8%;
+    height:auto;
+}
+#q,#w
+{
+    background-color:#c56c44;
+    margin:2px;
+    width:20%;
+    height:auto;
+    position:relative;
+    top:1%;
+    left:4%;
+    cursor:pointer;
+}
+#messages 
+{
+    position: absolute;
+    left: 32%;
+    top: 57%;
+    width: 100%;
+}
+.msg 
+{
+    position: absolute;
+    font-family: 'Comic Sans MS';
+    visibility: hidden;
+    font-size: 150%;
+    width: 100%;
+}
+#combo 
+{
+    color: yellow;
+}
+#ti 
+{
+    color: red;
+}
+#perfect 
+{
+    color: blue;
+}

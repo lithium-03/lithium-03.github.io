@@ -1,0 +1,745 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <title>
+        PicPuzzle
+    </title>
+    <meta property="og:title" content="PicPuzzle" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://lithium-03.github.io/pp/index.html" />
+    <meta property="og:image" content="http://lithium-03.github.io/pp/img/thumbnail.png" />
+    <meta property="og:site_name" content="PicPuzzle" />
+    <meta property="fb:admins" content="lithium-03.nidhin" />
+    <meta http-equiv="Cache-Control" content="must-revalidate" />
+    <meta property="og:description" content="Identify the famous personality." />
+    <meta name="author" content="Nidhin">
+    <meta name="description" content="Identify the famous personality in the least number of guesses." />
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="jquery.flipcountdown.css" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="jquery.flipcountdown.js"></script>
+    <!--<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>-->
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script>
+        function fbload(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+        !function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https';
+            if (!d.getElementById(id)) {
+                js = d.createElement(s); js.id = id;
+                js.src = p + '://platform.twitter.com/widgets.js';
+                fjs.parentNode.insertBefore(js, fjs);
+            }
+        }(document, 'script', 'twitter-wjs');
+        function googleplusload() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/platform.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+        }
+        jQuery(function ($) {
+            $("#counter").flipcountdown({ size: "lg", tick: function () { return score; } });
+            loadData();
+            $('.menu').mouseenter(showSideBar);
+        });
+        var score = 100,
+            sol = -1,
+            hint = '',
+            diff = '',
+            trivia = '',
+            over = true,
+            init = true,
+            success=false,
+            given = '',
+            played=0,
+            won = 0,
+            noOfqns=50;
+        var ans = [];
+        var revealOrder = [];
+        var qnOrder = [];
+        function loadData() {
+            checkCookie();
+        }
+        function saveData()
+        {
+            var data = String(played) + '|' + String(won) + '|' + diff;
+            setCookie("dataPp", data, 100);
+        }
+        function checkCookie() {
+            var data = getCookie("dataPp");
+            if (data != "") {
+                var arr = data.split('|');
+                played = Number(arr[0]);
+                won = Number(arr[1]);
+                diff = arr[2];
+            }
+            else {
+                played = 0;
+                won = 0;
+                diff = 'intermediate';
+                data = "0|0|intermediate";
+                setCookie("dataPp", data, 100);
+            }
+        }
+        function setCookie(cname, cvalue, ex) {
+            var d = new Date();
+            d.setTime(d.getTime() + (ex * 365 * 24 * 60 * 60 * 1000));
+            var expires = "expires=" + d.toGMTString();
+            document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+        }
+        function getCookie(cname) {
+            var name = cname + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+                var c = ca[i].trim();
+                if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+            }
+            return "";
+        }
+        function initialise(a)
+        {
+            switch (Number(a)) {
+                case 1:
+                    ans[0] = 'scarlett johansson';
+                    hint = 'The Widow has a painful sting';
+                    trivia = 'Scarlett Johansson is an American actress, model, and singer. Noteworthy roles include those in The Horse Whisperer, Ghost World, The Island, The Black Dahlia, The Prestige, The Other Boleyn Girl, Vicky Cristina Barcelona and He\'s Just Not That Into You. She has played the Marvel comic book character Black Widow / Natasha Romanoff in Iron Man 2, The Avengers and Captain America: The Winter Soldier and the upcoming Avengers: Age of Ultron.';
+                    break;
+                case 2:
+                    ans[0] = 'bruce willis';
+                    ans[1] = 'walter bruce willis';
+                    hint = 'Detective Lieutenant John McClane of the NYPD';
+                    trivia = 'Walter Bruce Willis, better known as Bruce Willis, is an American actor, producer, and singer. Probably best known for his role of John McClane in the Die Hard series. He has also appeared in over sixty films, including the box office hits, Pulp Fiction, 12 Monkeys, The Fifth Element, Armageddon, The Sixth Sense, Unbreakable and Sin City.';
+                    break;
+                case 3:
+                    ans[0] = 'bruce lee';
+                    hint = 'Enter the Dragon!!';
+                    trivia = 'Bruce Lee was a Hong Kong American martial artist, Hong Kong action film actor, martial arts instructor, filmmaker, and the founder of Jeet Kune Do. He is considered to be one of the most influential martial artists of all time, and a pop culture icon of the 20th century. He is credited with changing the way Asians were presented in American films. He is noted for his roles in five feature-length films: The Big Boss, Fist of Fury, Way of the Dragon, Enter the Dragon and The Game of Death.';
+                    break;
+                case 4:
+                    ans[0] = 'eminem';
+                    ans[1] = 'marshall bruce mathers III';
+                    ans[2] = 'slim shady';
+                    hint = 'Rap God';
+                    trivia = 'Marshall Bruce Mathers III, better known by his stage name Eminem and by his alter ego Slim Shady is an American rapper, record producer, songwriter, and actor. Eminem won Grammy Awards for both Relapse and Recovery, giving him a total of 13 Grammys in his career. Eminem has opened other ventures, including his own record label Shady Records with his manager Paul Rosenberg. He also has his own radio channel, Shade 45 on Sirius XM Radio.';
+                    break;
+                case 5:
+                    ans[0] = 'chester bennington';
+                    ans[1] = 'chester';
+                    ans[2] = 'chester charles bennington';
+                    hint = 'This hint will not matter in the end anyway';
+                    trivia = 'Chester Charles Bennington is an American musician, singer-songwriter, and actor. He is best known as the lead vocalist of rock bands Linkin Park and Dead by Sunrise.Bennington became known as a vocalist with Linkin Park\'s debut album, Hybrid Theory, in 2000, which was a massive commercial success. Bennington has been ranked in the Top 100 Heavy Metal Vocalists by Hit Parader (#46)';
+                    break;
+                case 6:
+                    ans[0] = 'harry houdini';
+                    ans[1] = 'erik weiss';
+                    ans[2] = 'houdini';
+                    hint = 'Magic!!';
+                    trivia = 'Harry Houdini (born Erik Weiss in Budapest) was a Hungarian-American illusionist and stunt performer, noted for his sensational escape acts. In 1904, thousands watched as he tried to escape from special handcuffs commissioned by London\'s Daily Mirror, keeping them in suspense for an hour. Another stunt saw him buried alive and only just able to claw himself to the surface, emerging in a state of near-breakdown.';
+                    break;
+                case 7:
+                    ans[0] = 'hugh jackman';
+                    ans[1] = 'hugh michael jackman'
+                    hint = 'Glutton, carcajou, skunk bear, or quickhatch';
+                    trivia = 'Hugh Michael Jackman is an Australian actor and producer who is involved in film, musical theatre, and television. Jackman has won international recognition for his roles in major films, notably as superhero, period, and romance characters. He is best known for his long-running role as The Wolverine in the X-Men film series, as well as for his leads in Kate & Leopold, Van Helsing, The Prestige, Australia, Real Steel, Les Misérables, and Prisoners.';
+                    break;
+                case 8:
+                    ans[0] = 'jennifer lawrence';
+                    ans[1] = 'jennifer shrader lawrence';
+                    hint = "District 12's tribute";
+                    trivia = 'Jennifer Shrader Lawrence is an American actress. At age 22, her performance in Silver Linings Playbook earned the Golden Globe for Best Actress and the Academy Award for Best Actress, making her the second-youngest Best Actress winner at the Oscars. She is also known for playing Raven Darkhölme / Mystique in the X:Men film series. Beginning in 2012, she gained fame for playing Katniss Everdeen in the The Hunger Games film series, which made her the highest-grossing action heroine of all time.';
+                    break;
+                case 9:
+                    ans[0] = 'kim jong-un';
+                    ans[1] = 'kim jong un'
+                    hint = 'The Dictator!';
+                    trivia = 'Kim Jong-un is the supreme leader of North Korea. He is the son of Kim Jong-il and the grandson of Kim Il-sung.On 9 March 2014 Kim Jong-un was elected to the Supreme People\'s Assembly. He was unopposed but voters had the choice of voting yes or no. There was a record turn-out of voters and according to government officials all voted yes.Kim was named the world\'s 46th most powerful person by Forbes Magazine\'s List of The World\'s Most Powerful People in 2013';
+                    break;
+                case 10:
+                    ans[0] = 'lionel messi';
+                    ans[1] = 'messi';
+                    ans[2] = 'leo messi';
+                    hint = 'Argentina';
+                    trivia = 'Lionel Andrés Messi is an Argentine footballer who plays as a forward for FC Barcelona and the Argentina national team. By the age of 21, Messi had received Ballon d\'Or and FIFA World Player of the Year nominations.Commonly ranked the best player in the world and rated by some as the greatest of all time, Messi is the first football player in history to win four FIFA/Ballons d\'Or, all of which he won consecutively, as well as the first to win three European Golden Shoe awards.';
+                    break;
+                case 11:
+                    ans[0] = 'mahatma gandhi';
+                    ans[1] = 'mohandas karamchand gandhi';
+                    ans[2] = 'gandhi';
+                    hint = 'No hints for this one :P';
+                    trivia = 'Mohandas Karamchand Gandhi (2 October 1869 – 30 January 1948) was the preeminent leader of Indian nationalism in British-ruled India. Employing nonviolent civil disobedience, Gandhi led India to independence and inspired movements for civil rights and freedom across the world. Gandhi is commonly, though not officially, considered the Father of the Nation in India. His birthday is commemorated there as Gandhi Jayanti and world-wide as the International Day of Nonviolence.';
+                    break;
+                case 12:
+                    ans[0] = 'mark zuckerberg';
+                    ans[1] = 'zuckerberg';
+                    hint = 'Computer programmer, Internet entrepreneur and the main reason for poor marks of many students';
+                    trivia = 'Mark Elliot Zuckerberg is best known as one of five co-founders of Facebook. Zuckerberg is the chairman and chief executive of Facebook, Inc. and his personal wealth, as of April 2014, is estimated to be $25.3 billion. Together with his college roommates and fellow Harvard University students Eduardo Saverin, Andrew McCollum, Dustin Moskovitz, and Chris Hughes, Zuckerberg launched Facebook from Harvard\'s dormitory rooms.';
+                    break;
+                case 13:
+                    ans[0] = 'morgan freeman';
+                    hint = 'God, Made a Batmobile, Goes through wormholes once a week';
+                    trivia = 'Morgan Freeman is an American actor, film director, and narrator. Freeman won the Best Supporting Actor Oscar in 2005 for Million Dollar Baby. Freeman has appeared in many other box office hits, including Unforgiven, Glory, Robin Hood: Prince of Thieves, Seven, Deep Impact, The Sum of All Fears, Bruce Almighty, Along Came a Spider, The Dark Knight trilogy, March of the Penguins and The Lego Movie. He is known for his distinctively smooth, deep voice';
+                    break;
+                case 14:
+                    ans[0] = 'nelson mandela';
+                    hint = 'Sorry, no hints';
+                    trivia = 'Nelson Rolihlahla Mandela (18 July 1918 – 5 December 2013) was a South African anti-apartheid revolutionary, politician and philanthropist who served as President of South Africa from 1994 to 1999. He is held in deep respect within South Africa, where he is often referred to by his Xhosa clan name, Madiba, or as Tata ("Father"); he is often described as "the father of the nation".';
+                    break;
+                case 15:
+                    ans[0] = 'sebastian vettel';
+                    hint = 'Formula 1';
+                    trivia = 'Sebastian Vettel is a professional German Formula One racer, currently driving for Red Bull Racing. He is the current Formula One World Champion, having won the championship 4 years in a row. He is among the most successful F1 drivers of all time. Vettel holds or held numerous "youngest" Formula One records, among them: the youngest driver to lead a race, to secure pole position, to win a race, to become a double, triple and a quadruple world champion.';
+                    break;
+                case 16:
+                    ans[0] = 'shakira';
+                    ans[1] = 'shakira ripoll';
+                    ans[2] = 'shakira pique';
+                    hint = 'You will never remember to forget this one';
+                    trivia = 'Shakira Isabel Mebarak Ripoll is a Colombian singer-songwriter, dancer, record producer, choreographer, and model. Her official song for the 2010 FIFA World Cup, "Waka Waka (This Time for Africa)", became the biggest-selling World Cup song of all time. She has a star on the Hollywood Walk of Fame, and she is one of the best-selling artists of all time, having sold more than 125 milion records including more than 75 million albums worldwide.';
+                    break;
+                case 17:
+                    ans[0] = 'sigmund freud';
+                    ans[1] = 'sigismund freud';
+                    ans[2] = 'freud';
+                    hint = 'Try psychoanalysis to get the answer';
+                    trivia = 'Sigmund Freud was an Austrian neurologist who became known as the founding father of psychoanalysis. Freud’s redefinition of sexuality to include its infantile forms led him to formulate the Oedipus complex as the central tenet of psychoanalytical theory. His analysis of dreams as wish-fulfillments provided him with models for the clinical analysis of symptom formation and the mechanisms of repression as well as for elaboration of his theory of the unconscious as an agency disruptive of conscious states of mind.';
+                    break;
+                case 18:
+                    ans[0] = 'jesse eisenberg';
+                    hint = 'Invented Facebook, Owns LexCorp';
+                    trivia = 'Jesse Adam Eisenberg is an American actor and playwright. He then played Facebook founder Mark Zuckerberg in The Social Network, for which he received a Golden Globe and Academy Award nomination in the Best Actor category. He will portray Superman villain Lex Luthor opposite Henry Cavill and Ben Affleck in Batman v Superman: Dawn of Justice, which will be released in 2016.';
+                    break;
+                case 19:
+                    ans[0] = 'nikola tesla';
+                    ans[1] = 'tesla';
+                    ans[2] = 'nicola tesla';
+                    hint = 'Mad Genius';
+                    trivia = 'Nikola Tesla was a Serbian American inventor, electrical engineer, mechanical engineer, and futurist best known for his contributions to the design of the AC electricity supply system. Tesla was renowned for his achievements and showmanship, earning him a reputation in popular culture as a "mad scientist". He also conducted experiments with mechanical oscillator/generators, electrical discharge tubes, and X-ray imaging. He even built a wireless controlled boat which may have been the first such device ever exhibited.';
+                    break;
+                case 20:
+                    ans[0] = 'tom hiddleston';
+                    ans[1] = 'thomas hiddleston';
+                    hint = '"Kneel before me!"';
+                    trivia = 'Thomas William "Tom" Hiddleston (born 9 February 1981) is an English actor. He is known for playing the character of Loki in the Marvel Studios films Thor (2011), The Avengers (2012), and Thor: The Dark World (2013). He has also appeared in Steven Spielberg\'s First World War film War Horse (2011), The Deep Blue Sea (2011), Woody Allen\'s romantic comedy Midnight in Paris (2011).';
+                    break;
+                case 21:
+                    ans[0] = 'werner heisenberg';
+                    ans[1] = 'heisenberg';
+                    hint = 'You may or may not know the answer';
+                    trivia = 'Werner Karl Heisenberg was a German theoretical physicist and one of the key creators of quantum mechanics. He published his work in 1925 in a breakthrough paper. In the subsequent series of papers with Max Born and Pascual Jordan, during the same year, this matrix formulation of quantum mechanics was substantially elaborated. In 1927 he published his uncertainty principle. Heisenberg was awarded the Nobel Prize in Physics for 1932. He also made important contributions to the theories of the hydrodynamics of turbulent flows, the atomic nucleus, ferromagnetism, cosmic rays, and subatomic particles';
+                    break;
+                case 22:
+                    ans[0] = 'maria sharapova';
+                    hint = 'No hints!';
+                    trivia = 'Maria Yuryevna Sharapova is a Russian professional tennis player. Maria won her first grand slam title, Wimbledon at the age of just 17 in 2004 and at 15, Maria became the youngest person ever to reach the finals of Australian Open junior tournament in 2002. Sharapova has won 32 WTA singles titles, including five Grand Slam singles titles.';
+                    break;
+                case 23:
+                    ans[0] = 'marilyn monroe';
+                    ans[1] = 'norma jeane mortenson'
+                    hint = 'Died too young :/';
+                    trivia = 'Marilyn Monroe was an American actress, model, and singer, who became a major sex symbol. Her "dumb blonde" persona was used to comic effect in films such as Gentlemen Prefer Blondes, How to Marry a Millionaire and The Seven Year Itch.The final years of Monroe\'s life were marked by illness, personal problems culminating in death from a drug overdose. When she died, many of her fans also committed suicide. One even left a note saying, “If the most wonderful, beautiful thing in the world has nothing to live for, then neither must I.”';
+                    break;
+                case 24:
+                    ans[0] = 'valentina tereshkova';
+                    hint = 'First woman in space.';
+                    trivia = 'Valentina Vladimirovna Tereshkova is a retired Soviet cosmonaut and engineer, and the first woman to have flown in space, having been selected from more than four hundred applicants and five finalists to pilot Vostok 6 on 16 June 1963. In order to join the Cosmonaut Corps, Tereshkova was only honorarily inducted into the Soviet Air Force and thus she also became the first civilian to fly in space. Before her recruitment as a cosmonaut, Tereshkova was a textile factory assembly worker and an amateur skydiver. She became a member of the Communist Party of the Soviet Union, holding various political offices.';
+                    break;
+                case 25:
+                    ans[0] = 'mary kom';
+                    hint = 'Think Indian Boxing';
+                    trivia = 'Mangte Chungneijang Mary Kom ,or simply Mary Kom, is an Indian boxer. She is a five-time World Boxing champion, and the only woman boxer to have won a medal in each one of the six world championships. She is the only Indian woman boxer to have qualified for the 2012 Summer Olympics, competing in the flyweight (51 kg) category and winning the bronze medal.';
+                    break;
+                case 26:
+                    ans[0] = 'marie curie';
+                    ans[1] = 'madam curie';
+                    ans[2] = 'madame curie';
+                    ans[3] = 'mary curie';
+                    ans[4] = 'curie';
+                    hint = 'Po-209';
+                    trivia = 'Marie Skłodowska-Curie was a Polish physicist and chemist who conducted pioneering research on radioactivity. She was the first woman to win a Nobel Prize, the only woman to win in two fields, and the only person to win in multiple sciences. Her achievements include a theory of radioactivity, and the discovery of polonium and radium. She was married to French physicist Pierre Curie. She shared the 1903 Nobel Prize in Physics with her husband and with physicist Henri Becquerel. She won the 1911 Nobel Prize in Chemistry.';
+                    break;
+                case 27:
+                    ans[0] = 'angelina jolie';
+                    hint = 'Humanitarian, Raids Tombs';
+                    trivia = 'Angelina Jolie, is an American actress, film director, screenwriter, and author. She was named Hollywood\'s highest-paid actress by Forbes in 2009, 2011, and 2013. Jolie promotes humanitarian causes, and is noted for her work with refugees as a Special Envoy and former Goodwill Ambassador for the UNHCR. Jolie achieved wide fame after her portrayal of the video game heroine Lara Croft in Lara Croft: Tomb Raider.As Lara Croft, Jolie performed 80% of her own stunts.';
+                    break;
+                case 28:
+                    ans[0] = 'adolf hitler';
+                    ans[1] = 'hitler';
+                    hint = 'The greatest dictator';
+                    trivia = 'Adolf Hitler was the leader of the Nazi Party and the dictator of Nazi Germany from 1934 to 1945. His aggressive foreign policy is considered to be the primary cause of the outbreak of World War II in Europe. Under Hitler\'s ideology, the regime was responsible for the genocide of at least 5.5 million Jews, and millions of other victims whom he and his followers deemed racially inferior.<ul style="text-align:left;"><li>Hitler\'s first love was a Jewish girl, Stefanie Isak.</li><li>He led the first anti-smoking campaign in modern history</li></ul>';
+                    break;
+                case 29:
+                    ans[0] = 'helen keller';
+                    hint = 'Rise above disabilities';
+                    trivia = 'Helen Adams Keller was an American author, political activist, and lecturer.  At 19 months old, she contracted an illness, which might have been scarlet fever or meningitis. The illness left her both deaf and blind. Nobody knows for sure what caused Helen Keller\'s deaf-blindedness. She was the first deaf and blind person to earn a college degree. A prolific author, Keller was well-travelled and outspoken in her convictions. She campaigned for women\'s suffrage, labour rights, socialism, and other radical left causes.';
+                    break;
+                case 30:
+                    ans[0] = 'aaron paul';
+                    hint = 'Yo, Here\'s a hint bitch!!!';
+                    trivia = 'Aaron Paul Sturtevant (born August 27, 1979) is an American actor. He is best known for his critically acclaimed role as Jesse Pinkman in the hit AMC series Breaking Bad (2008–13). For this, he won two Primetime Emmy Awards for Outstanding Supporting Actor in a Drama Series, making him one of five actors to win this award more than once. He has also won two Saturn Awards for Best Supporting Actor on Television.';
+                    break;
+                case 31:
+                    ans[0] = 'angela merkel';
+                    ans[1] = 'angela dorothea merkel';
+                    hint = 'A german chancellor';
+                    trivia = 'Angela Dorothea Merkel is a German politician and a former research scientist, who has been the Chancellor of Germany since 2005 and the leader of the Christian Democratic Union (CDU) since 2000. She is the first woman to hold either office. Having earned a doctorate as a physical chemist, Merkel entered politics in the wake of the Revolutions of 1989. Angela Merkel has been described as the de facto leader of the European Union, and was ranked as the world\'s second most powerful person by Forbes magazine in 2012, the highest ranking ever achieved by a woman, and is now ranked fifth.';
+                    break;
+                case 32:
+                    ans[0] = 'charlie chaplin';
+                    ans[1] = 'charles chaplin';
+                    ans[2] = 'charles spencer chaplin';
+                    ans[3] = 'sir charlie chaplin';
+                    ans[4] = 'sir charles chaplin';
+                    ans[5] = 'sir charles spencer chaplin';
+                    hint = 'The great dictator';
+                    trivia = 'Sir Charles Spencer "Charlie" Chaplin, was an English actor, comedian, and filmmaker, who rose to fame in the silent era. Chaplin\'s childhood in London was one of poverty and hardship. His father was absent and his mother struggled financially. When he was 14, his mother was committed to a mental asylum. His first feature-length was The Kid (1921), followed by A Woman of Paris (1923), The Gold Rush (1925), and The Circus (1928). He refused to move to sound films in the 1930s, and produced City Lights (1931) and Modern Times (1936) without dialogue. Chaplin\'s The Great Dictator (1940), satirised Adolf Hitler.';
+                    break;
+                case 33:
+                    ans[0] = 'deepika padukone';
+                    hint = 'Bollywood';
+                    trivia = 'Deepika Padukone is an Indian film actress and model. She has established a successful career in Bollywood films, and is cited in the media as one of the most popular and attractive Indian celebrities. Padukone is the daughter of the badminton player Prakash Padukone. As a teenager she played badminton in national level championships, but left her career in sport to become a fashion model. The 2012 box office hit Cocktail marked a significant turning point in her career, earning her critical acclaim and Best Actress nominations at several award ceremonies.';
+                    break;
+                case 34:
+                    ans[1] = 'kim hyuna';
+                    ans[0] = 'hyuna';
+                    ans[2] = 'hyuna kim';
+                    hint = 'The korean woman who has been seen by 2/7th of the world population at least once';
+                    trivia = 'Kim Hyuna (born June 6, 1992), often performing under the mononym HyunA, is a South Korean rapper, singer-songwriter, dancer, lyricist, model, designer and television personality. She is best known for being the lead rapper of the Korean girl group 4Minute, and musical duo Trouble Maker. Hyuna appeared as the central female dancer and love interest in the Psy music video for "Gangnam Style," having been selected personally by Psy during the initial production stage, and gained much international exposure.';
+                    break;
+                case 35:
+                    ans[0] = 'joan of arc';
+                    hint = 'A patron saint of France';
+                    trivia = 'Joan of Arc is a heroine of France and a Roman Catholic saint. She was born to a peasant family at Domrémy in north-east France. Joan said she received visions of the Archangel Michael, Saint Margaret and Saint Catherine instructing her to save France from English domination late in the Hundred Years\' War. King Charles VII sent Joan to the siege of Orléans. She gained prominence after the siege was lifted in nine days. The victories led to Charles VII\'s coronation. On 23 May 1430, she was captured and burned at the stake when she was about 19 years old.';
+                    break;
+                case 36:
+                    ans[0] = 'vladimir lenin';
+                    ans[1] = 'lenin';
+                    ans[2] = 'vladimir ilyich lenin';
+                    ans[3] = 'vladimir ilyich ulyanov';
+                    hint = 'Russian revolutionary';
+                    trivia = 'Vladimir Ilyich Lenin was a Russian communist revolutionary, politician and political theorist. He was the leader of the Russian Soviet Federative Socialist Republic from 1917, and then  Premier of the Soviet Union from 1922, until his death. Under his administration, the Russian Empire was dissolved and replaced by the Soviet Union, industry and businesses were nationalized, with widespread societal reform implemented. Politically a Marxist, his theoretical contributions to Marxist thought are known as Leninism, which coupled with Marxian economic theory have collectively come to be known as Marxism–Leninism.';
+                    break;
+                case 37:
+                    ans[0] = 'niels bohr';
+                    ans[1] = 'bohr';
+                    hint = 'Quantum physics, nuclear bombs, and the hydrogen atom';
+                    trivia = 'Niels Henrik David Bohr was a Danish physicist who made foundational contributions to understanding atomic structure and quantum theory, for which he received the Nobel Prize in Physics in 1922. Bohr was also a philosopher and a promoter of scientific research. Bohr developed the Bohr model of the atom, in which he proposed that energy levels of electrons are discrete, and that the electrons revolve in stable orbits around the atomic nucleus, but can jump from one energy level to another. Although the Bohr model has been supplanted by other models, its underlying principles remain valid.';
+                    break;
+                case 38:
+                    ans[0] = 'alan turing';
+                    ans[1] = 'turing';
+                    hint = 'Computer Scientist cum Marathon runner';
+                    trivia = 'Alan Mathison Turing, was a British mathematician, logician, cryptanalyst, philosopher, computer scientist, mathematical biologist, and marathon and ultra distance runner. He was highly influential in the development of computer science, providing a formalisation of the concepts of "algorithm" and "computation". Turing is considered as the "Father of Theoretical Computer Science and Artificial Intelligence. Turing proposed an experiment known as the Turing test, an attempt to define a standard for a machine to be called "intelligent". ';
+                    break;
+                case 39:
+                    ans[0] = 'marie antoinette';
+                    hint = '"Let them eat Cake!"';
+                    trivia = 'Marie Antoinette, born Archduchess of Austria, assumed the title Queen of France and of Navarre when her husband ascended the throne of France as Louis XVI. Initially charmed, the French people eventually came to dislike her, accused of being profligate, promiscuous, and of harbouring sympathies for Austria. During the French revolution, Marie Antoinette was herself tried and executed by guillotine on 16 October 1793. Long after her death, Marie Antoinette is considered to be a part of popular culture and a major historical figure, being the subject of several books, films and other forms of media.';
+                    break;
+                case 40:
+                    ans[0] = 'anne frank';
+                    hint = 'Think Holocaust';
+                    trivia = 'Annelies Marie "Anne" Frank, is one of the most discussed Jewish victims of the Holocaust. Her wartime diary The Diary of a Young Girl has been the basis for several plays and films. The Franks moved from Germany to Amsterdam in 1933, after the Nazis gained control over Germany. By May 1940, they were trapped in Amsterdam by the German occupation of the Netherlands. They went into hiding in some concealed rooms in the building where Anne\'s father worked. After two years, the group was betrayed and transported to concentration camps, where Anne died of typhus in March 1945.';
+                    break;
+                case 41:
+                    ans[0] = 'bill gates';
+                    ans[1]='william gates';
+                    hint = 'You should be thankful to him :)';
+                    trivia = 'William Henry "Bill" Gates III is an American business magnate, philanthropist and computer programmer. Gates is the former CEO and chairman of Microsoft, which he co-founded with Paul Allen. He is consistently ranked in the Forbes list of the world\'s wealthiest people and was the wealthiest overall from 1995 to 2009. Gates has pursued a number of philanthropic endeavors, donating large amounts of money to various charitable organizations and scientific research programs through the Bill & Melinda Gates Foundation';
+                    break;
+                case 42:
+                    ans[0] = 'cristiano ronaldo';
+                    ans[1]='cr7'
+                    hint = '7';
+                    trivia = 'Cristiano Ronaldo dos Santos Aveiro, known as Cristiano Ronaldo, is a Portuguese footballer who plays as a forward for Real Madrid and captains the Portugal national team. He became the most expensive footballer in history when he moved from Manchester United to Real Madrid in 2009 in a transfer worth £80 million. He was awarded the European Golden Shoe in 2008, 2011 and 2014. In 2008, he won 3 of the 4 main PFA and FWA trophies and was named the FIFA World Player of the Year, World Soccer Player of the Year, and the Onze d\'Or.';
+                    break;
+                case 43:
+                    ans[0] = 'princess diana';
+                    ans[1] = 'diana princess';
+                    ans[2] = 'diana spencer';
+                    hint = '.....Princess of Wales';
+                    trivia = 'Diana, Princess of Wales was the first wife of Charles, Prince of Wales. Her wedding to the Prince of Wales on 29 July 1981 was held at St Paul\'s Cathedral and seen by a global television audience of over 750 million. After her marriage, she undertook a variety of public engagements. She was well known for her fund-raising work for international charities and as an eminent celebrity of the late 20th century. Media attention and public mourning were extensive following her death in a car crash in Paris on 31 August 1997.';
+                    break;
+                case 44:
+                    ans[0] = 'george washington';
+                    ans[1] = 'washington';
+                    hint = 'POTUS 1';
+                    trivia = 'George Washington was the first President of the United States, the Commander-in-Chief of the Continental Army during the American Revolutionary War, and one of the Founding Fathers of the United States. Washington had a vision of a great and powerful nation that would be built on republican lines using federal power. He sought to use the national government to preserve liberty, improve infrastructure, open the western lands, promote commerce, found a permanent capital, reduce regional tensions and promote a spirit of American nationalism.';
+                    break;
+                case 45:
+                    ans[0] = 'jane goodall';
+                    hint = 'Jane of the Apes...';
+                    trivia = 'Dame Jane Morris Goodall is a British primatologist, ethologist and anthropologist. Considered to be the world\'s foremost expert on chimpanzees, Goodall is best known for her 45-year study of social and family interactions of wild chimpanzees in Gombe Stream National Park, Tanzania. She is the founder of the Jane Goodall Institute and the Roots & Shoots program, and has worked on conservation and animal welfare issues. She was one of the "Leakey\'s Trimates"- three female researchers handpicked by paleoanthropologist Louis Leakey for primate research.';
+                    break;
+                case 46:
+                    ans[0] = 'steve jobs';
+                    ans[1] = 'steven jobs';
+                    hint = 'Executive producer of Toy Story';
+                    trivia = 'Steven Paul "Steve" Jobs was an American entrepreneur and inventor, who was the co-founder, chairman, and CEO of Apple Inc. Through Apple, he is widely recognized as a charismatic pioneer of the personal computer revolution and for his influential career in the computer and consumer electronics fields. Jobs also co-founded and served as CEO of Pixar Animation Studios. Jobs was among the first to see the potential of GUI, which led to the creation of the Macintosh. He also played a role in introducing the LaserWriter, one of the first laser printers.';
+                    break;
+                case 47:
+                    ans[0] = 'tim berners-lee';
+                    ans[1] = 'tim berners lee';
+                    ans[2] = 'timbl';
+                    ans[3]='timothy berners lee'
+                    hint = 'Yet another 1955-born computer scientist you should be thankful to';
+                    trivia = 'Sir Timothy John "Tim" Berners-Lee, also known as "TimBL", is a British computer scientist, and the inventor of the World Wide Web. He made a proposal for an information management system in March 1989, and he implemented the first successful communication between a Hypertext Transfer Protocol (HTTP) client and server via the Internet that same year. Berners-Lee is the director of the World Wide Web Consortium (W3C), which oversees the Web\'s continued development.';
+                    break;
+                case 48:
+                    ans[0] = 'albert einstein';
+                    ans[1] = 'einstein';
+                    hint = 'Explained Brownian motion as an empirical evidence for the atomic theory';
+                    trivia = 'Albert Einstein was a German-born theoretical physicist. He developed the general theory of relativity, one of the two pillars of modern physics. He is best known for his mass–energy equivalence formula E = mc<sup>2</sup>. He received the 1921 Nobel Prize in Physics for his discovery of the law of the photoelectric effect. The latter was pivotal in establishing quantum theory.';
+                    break;
+                case 49:
+                    ans[0] = 'vinton cerf';
+                    ans[1] = 'vint cerf';
+                    hint = 'The man in a suit for the internet';
+                    trivia = 'Vinton Gray "Vint" Cerf is an American internet pioneer, who is recognized as the father of the Internet. Cerf was a program manager for the DARPA funding various groups to develop TCP/IP technology. When the Internet began to transition to a commercial opportunity during the late 1980s, Cerf moved to MCI where he was instrumental in the development of the first commercial email system (MCI Mail) connected to the Internet. Cerf was instrumental in the formation of the ICANN.';
+                    break;
+                case 50:
+                    ans[0] = 'vladimir putin';
+                    ans[1] = 'putin';
+                    hint = '';
+                    trivia = 'Vladimir Vladimirovich Putin has been the President of Russia since 7 May 2012. He served as President from 2000 to 2008, and as Prime Minister of Russia from 1999 to 2000 and from 2008 to 2012. During his last term as Prime Minister, he was also the Chairman of the United Russia political party. For 16 years Putin served as an officer in the KGB, rising to the rank of Lieutenant Colonel before he retired to enter politics in his native Saint Petersburg in 1991.';
+                    break;
+            }
+        }
+        function newGame() {
+            over = success = false;
+            played++;
+            saveData();
+            document.getElementById("ans").focus();
+            score = 100;
+            ans = [];
+            $('#ans').val("");
+            if (qnOrder.length == 0) {
+                var toAdd = [];
+                for (i = 1; i <= noOfqns; i++)
+                    toAdd[toAdd.length] = i;
+                for (i = 0; i < noOfqns; i++) {
+                    var c = Math.floor(Math.random() * toAdd.length);
+                    if (toAdd[c] == undefined)
+                        c--;
+                    qnOrder[i] = String(toAdd[c]);
+                    toAdd.splice(c, 1);
+                }
+            }
+            sol = qnOrder[0];
+            qnOrder.shift();
+            document.getElementById("matrixAns").firstChild.src = "q/q" + sol + ".jpg";
+            setRevealOrder();
+            if (diff === 'hard')
+                score = 60;
+            else if (diff === 'intermediate')
+                score = 80;
+            else
+                score = 100;
+            initialise(sol);
+            for (i = 0; i < 25; i++)
+                $('#i' + String(i)).css("background-color", "rgba(61, 61, 61, 0.999)");
+            $('#ins').animate({ 'opacity': '0' }, 200);
+            $('#ansField').animate({ 'bottom': '0%' });
+            hideSideBar();
+            if (init)
+            {
+                init = false;
+                $('.menu').mouseleave(hideSideBar);
+            }
+            closemsg();
+            closedialog('0');
+            $('#matrix').fadeOut(0).css('visibility', 'visible').fadeIn(500);
+        }
+        function setRevealOrder()
+        {
+            var toAdd = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24];
+            for (i = 0; i < 25; i++) {
+                var c = Math.floor(Math.random() * toAdd.length);
+                if (toAdd[c] == undefined)
+                    c--;
+                revealOrder[i] = toAdd[c];
+                toAdd.splice(c, 1);
+            }
+        }
+        function hideSideBar() {
+            $('.menu').animate({ 'left': '-15%' }, 300);
+        }
+        function showSideBar() {
+            $('.menu').animate({ 'left': '0%' }, 300);
+        }
+        function closemsg() {
+            $('#messagebox').animate({ 'top': '-20%' });
+        }
+        function showmsg(title, msg) {
+            $('#msgtitle').text(title);
+            $('#msgbody').html(msg);
+            $('#messagebox').animate({ 'top': '0%' });
+            window.setTimeout(closemsg, 8000);
+        }
+        function closedialog(a) {
+            if (a == 'dif' || a == '0') {
+                $('#difdialog').parent().fadeOut(300);
+            }
+            else if (a == 'share' || a == '0') {
+                $('#sharedialog').parent().fadeOut(300);
+            }
+            else if (a == 'end' || a == '0') {
+                $('#enddialog').parent().fadeOut(500);
+            }
+        }
+        function opendialog(a) {
+            if (a == 'dif') {
+                $('#difdialog').parent().css('visibility', 'visible').fadeIn(300);
+                if (diff === 'hard') {
+                    document.getElementById("dH").checked = true;
+                    document.getElementById("dI").checked=false;
+                    document.getElementById("dE").checked=false;
+                }
+                else if (diff === 'intermediate') {
+                    document.getElementById("dH").checked = false;
+                    document.getElementById("dI").checked = true;
+                    document.getElementById("dE").checked = false;
+                }
+                else if(diff==='easy')
+                {
+                    document.getElementById("dH").checked = false;
+                    document.getElementById("dI").checked = false;
+                    document.getElementById("dE").checked = true;
+                }
+            }
+            else if (a == 'share') {
+                $('#sharedialog').parent().css('visibility', 'visible').fadeIn(300);
+            }
+            else if(a=='end')
+            {
+                $('#enddialog').parent().css('visibility', 'visible').fadeIn(500);
+            }
+        }
+        function degray(cellIndex) {
+            $('#i' + String(cellIndex)).css('background-color', 'rgba(61, 61, 61, 0)');
+        }
+        function hintShow() {
+            if (score < 20)
+            {
+                showmsg('Error', 'Insufficient Credits!!');
+            }
+            else
+            {
+                if (window.confirm("Warning:Hints may range from obvious to vague to useless. There is no assurance that you will even get a hint. Click OK to take your chances and lose 20 credits.")) 
+                {
+                    showmsg("Hint", hint);
+                    score -= 20;
+                }
+            }
+        }
+        function savedif() {
+            closedialog('dif');
+            var selectedVal = "";
+            var selected = $("input[type='radio'][name='difficulty']:checked");
+            if (selected.length > 0) {
+                selectedVal = selected.val();
+            }
+            if (selectedVal != "" && selectedVal != diff) {
+                diff = selectedVal;
+                saveData();
+                newGame();
+            }
+        }
+        function reveal(num,k,p)
+        {
+            if (p=='end')
+                endGame(false);
+            var t = false;
+            if (num == revealOrder.length)
+                t = true;
+            for(i=0;i<num;i++)
+            {
+                if (score >= 5)
+                {
+                    degray(revealOrder[0]);
+                    revealOrder.shift();
+                    if(k==false)
+                    score -= 5;
+                }
+                else
+                {
+                    if (t == true ) {
+                        degray(revealOrder[0]);
+                        revealOrder.shift();
+                        if(k==false)
+                        score = 0;
+                    }
+                    else
+                    {
+                        showmsg('Error', 'Insufficient Credits!!');
+                    }
+                }
+            }
+        }
+        function endGame(a)
+        {
+            over = true;
+            if (success)
+                a = true;
+            if (a)
+            {
+                $('#endmsg').text(':) The answer is indeed ' + given.toUpperCase());
+                $('#endtrivia').html(trivia);
+                won++;
+                saveData();
+                opendialog('end');
+                reveal(revealOrder.length, true);
+            }
+            else
+            {
+                $('#endmsg').text(':( The answer was ' + ans[0].toUpperCase());
+                $('#endtrivia').html(trivia);
+                opendialog('end');
+            }
+        }
+        function submit()
+        {
+            if (over)
+            {
+                if (success)
+                    endGame(false);
+                return;
+            }
+            given = $.trim($('#ans').val().toLowerCase());
+            given = given.replace(/\s+/g, " ");
+            if ($.inArray(given, ans) != -1) {
+                endGame(true);
+                success = true;
+            }
+            else if(given!=''){
+                if (score >= 20) {
+                    score -= 20;
+                }
+                else {
+                    score = 0;
+                }
+                showmsg('Wrong guess', 'Try Again');
+            }
+            if (score == 0&&given!='')
+                endGame(false);
+        }
+        function statstring()
+        {
+            return ('Number of games played:' + String(played) + '<br/>Number of games won:' + String(won));
+        }
+    </script>
+    <div>
+        <div id="header">
+            <span onclick="window.open('https://www.facebook.com/picpuzzlebylithium03', '_blank').focus();" style="cursor:pointer;">
+                PicPuzzle
+            </span>
+        </div>
+        <div class="menu">
+            <div class="menuitem" id="new" onclick="newGame();">New Game</div>
+            <div class="menuitem" id="dif" onclick="opendialog('dif');">Difficulty</div>
+            <div class="menuitem" id="stat" onclick="showmsg('Stats',statstring());">Stats</div>
+            <div class="menuitem" id="shr" onclick="fbload(document, 'script', 'facebook-jssdk'); googleplusload(); opendialog('share');">Share</div>
+        </div>
+        <div id="matrix" oncontextmenu="return false;">
+            <div id="matrixBlank">
+                <table cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td id="i0"></td>
+                        <td id="i1"></td>
+                        <td id="i2"></td>
+                        <td id="i3"></td>
+                        <td id="i4"></td>
+                    </tr>
+                    <tr>
+                        <td id="i5"></td>
+                        <td id="i6"></td>
+                        <td id="i7"></td>
+                        <td id="i8"></td>
+                        <td id="i9"></td>
+                    </tr>
+                    <tr>
+                        <td id="i10"></td>
+                        <td id="i11"></td>
+                        <td id="i12"></td>
+                        <td id="i13"></td>
+                        <td id="i14"></td>
+                    </tr>
+                    <tr>
+                        <td id="i15"></td>
+                        <td id="i16"></td>
+                        <td id="i17"></td>
+                        <td id="i18"></td>
+                        <td id="i19"></td>
+                    </tr>
+                    <tr>
+                        <td id="i20"></td>
+                        <td id="i21"></td>
+                        <td id="i22"></td>
+                        <td id="i23"></td>
+                        <td id="i24"></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="matrixAns"><img src="" draggable="false" /></div>
+        </div>
+        <div id="ins">
+            Identify the personality hidden behind the gray card in the least number of guesses.<br />
+            <span style="color:#7e0000;">Click or Tap New Game to begin.</span>
+        </div>
+        <div id="messagebox">
+            <div id="msgtitle"></div>
+            <img src="img/close.png" style="position:absolute;right:0;top:0;cursor:pointer;" onclick="closemsg();" />
+            <div id="msgbody"></div>
+        </div>
+        <div id="ansField">
+            <input type="text" id="ans" autofocus autocomplete="off" />
+            <div onclick="submit();" class="buttons" style="left:36%;"><div style="position:absolute;top:10%;left:30%;">Submit</div></div>
+            <div onclick="reveal(1,false);" class="buttons" style="left: 52%;"><div style="position:absolute;top:10%;left:18%;">Reveal Tile</div></div>
+            <div onclick="reveal(revealOrder.length,false,'end');" class="buttons" style="left: 68%;"><div style="position:absolute;top:10%;left:18%;">Show Answer</div></div>
+            <div onclick="hintShow();" class="buttons" style="left:84%;"><div style="position:absolute;top:10%;left:35%;">Hint!</div></div>
+        </div>
+        <div class="dialogContainer">
+            <div id="difdialog" class="dialog">
+                <img src="img/close.png" style="position:absolute;right:0;top:0;cursor:pointer;" onclick="closedialog('dif');" /><br />
+                <div style="font-size:130%;font-weight:bolder;">Changing difficulty will start new game</div>
+                <input type="radio" name="difficulty" value="easy" id="dE" />Easy
+                <input type="radio" name="difficulty" value="intermediate" id="dI"/>Intermediate
+                <input type="radio" name="difficulty" value="hard" id="dH"/>Hard
+                <div class="buttons" id="ok" onclick="savedif();">OK</div>
+            </div>
+        </div>
+        <div class="dialogContainer">
+            <div id="enddialog" class="dialog">
+                <img src="img/close.png" style="position:absolute;right:0;top:0;cursor:pointer;" onclick="closedialog('end');" /><br />
+                <div style="font-size:110%;font-weight:bold;" id="endmsg"></div>
+                <div style="font-size:80%;" id="endtrivia"></div>
+                <div class="buttons" id="ok" style="top:75%;" onclick="newGame(); closedialog('end');">New game</div>
+            </div>
+        </div>
+        <div class="dialogContainer">
+            <div id="sharedialog" class="dialog" style="top:25%;height:50%;min-height:320px;background-color:rgba(255, 101, 0, 0.9);">
+                <img src="img/close.png" style="position:absolute;right:0;top:0;cursor:pointer;" onclick="closedialog('share');" /><br />
+                <div id="loading" style="position:absolute;left:50px;color:#002cff;">Facebook is loading....</div>
+                <div class="fb-like-box" style="background-color:white;position:absolute;left:50px;" data-href="https://www.facebook.com/picpuzzlebylithium03" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+                <div class="twitter-tweet" style="position:absolute;left:450px;"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://lithium-03.github.io/pp/" data-text="Identify the personality behind the gray card." data-via="nidhin_iitkgp" data-size="large">Tweet</a></div>
+                <div class="google+1" style="position:absolute;left:450px;top:200px;"><div class="g-plusone" data-size="tall"></div></div>
+                <div class="fb-share-button" style="position:absolute;left:450px;top:100px;" data-href="http://lithium-03.github.io/pp/" data-width="800" data-type="box_count"></div>
+            </div>
+        </div>
+        <div id="counterContainer">
+            <div>CREDITS REMAINING</div>
+            <div id="counter"></div>
+        </div>
+    </div>
+</body>
+</html>

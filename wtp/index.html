@@ -1,0 +1,103 @@
+<html xmlns ="http://www.w3.org/1999/xhtml"
+           xmlns:og="http://ogp.me/ns#"
+           xmlns:fb="https://www.facebook.com/2008/fbml">
+    <head>
+        <title>
+            Where's the Pie?
+        </title>
+        <meta property="og:title" content="Where's the Pie?" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://lithium-03.github.io/game0.html" />
+        <meta property="og:image" content="http://lithium-03.github.io/img/red.png" />
+        <meta property="og:site_name" content="Where's the Pie?" />
+        <meta property="fb:admins" content="lithium-03.nidhin" />
+        <meta http-equiv="Cache-Control" content="must-revalidate" />
+        <meta property="og:description" content="A optimum-path planning game.Collect as many pies as you can." />
+        <meta name="author" content="Nidhin">
+        <meta name="description" content="An entertaining optimum-path planning game. Play as Chef DePie and collect as many pies as you can." />
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <script src="js/social.js"></script>
+        <script src="js/scripts.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    </head>
+    <body style="overflow: hidden !important;position:fixed; background-color:#00aca6 !important;background:none;" onload="loadStat();">
+        <div id="fb-root"></div>
+        <script>
+            function showIns()
+            {
+                $('#dialog').slideUp(0).css('visibility', 'visible').slideDown(500);
+                
+            }
+            function hideIns()
+            {
+                $('#dialog').slideUp(500);
+            }
+            var highScore,
+                highBat,
+                longestCombo;
+            function checkCookie() {
+                var scorest = getCookie("scorest");
+                if (scorest != "") {
+                    var arr = scorest.split('|');
+                    highScore = Number(arr[0]);
+                    highBat = Number(arr[1]);
+                    longestCombo = Number(arr[2]);
+                }
+                else {
+                    highScore = 0;
+                    highBat = 0;
+                    longestCombo = 0;
+                    scorest = "0|0|0";
+                    setCookie("scorest", scorest, 100);
+                }
+            }
+            function setCookie(cname, cvalue, ex) {
+                var d = new Date();
+                d.setTime(d.getTime() + (ex * 365 * 24 * 60 * 60 * 1000));
+                var expires = "expires=" + d.toGMTString();
+                document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+            }
+            function getCookie(cname) {
+                var name = cname + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i].trim();
+                    if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+                }
+                return "";
+            }
+            function loadStat()
+            {
+                checkCookie();
+                var statString = 'Highest Score:';
+                statString = statString + String(highScore) + '<br/>';
+                statString = statString + 'Most pies found in a single game:' + String(highBat) + '<br/>';
+                statString = statString + 'Longest Combo Ever:' + String(longestCombo);
+                document.getElementById('txtarea').innerHTML=statString;
+            }
+            function showStat()
+            {
+                $('#dialogstat').slideUp(0).css('visibility', 'visible').slideDown(500);
+            }
+            function hideStat() {
+                $('#dialogstat').slideUp(500);
+            }
+        </script>
+        <div class="header"><b>Where's the Pie?</b></div>
+        <div style="position:absolute;left:43%;top:21%;"><span class="fb-like" data-href="http://lithium-03.github.io/game1.html" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></span><span style="position:absolute; left:150%;"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://lithium-03.github.io/wtp/" data-text="A optimum-path planning game.Collect as many pies as you can." data-via="nidhin_iitkgp">Tweet</a></span><br /></div>
+            <br />
+            <a href="game1.html"><img id="new" class="game" src="img/new.png" onmouseover="this.src='img/new1.png';" onmouseout="this.src='img/new.png';"></a><br />
+            <br /><a href="http://lithium-03.github.io/"><img id="bk" class="game" src="img/back0.png" onmouseover="this.src='img/back1.png';" onmouseout="this.src='img/back0.png';"></a>
+        <img id="ins" class="game" src="img/ins.png" onmouseover="this.src='img/ins1.png'"onmouseout="this.src='img/ins.png'" onclick="showIns();" />
+        <img id="stat" class="game" src="img/stats.png" onmouseover="this.src='img/stats1.png'" onmouseout="this.src='img/stats.png'" onclick="showStat();" />
+            <img src="img/new1.png" style="visibility:hidden;">
+            <img src="img/back1.png" style="visibility:hidden;">
+            <img src="img/red1.png" style="visibility:hidden;">
+        <img src="img/ins1.png" style="visibility:hidden;">
+        <img src="img/stats1.png" style="visibility:hidden;">
+        <div id="dialog" class="dialog1"><img style="width:2.5%;height:auto;position:absolute;top:0;right:0;"onclick="hideIns();" src="img/close.png" /><div style="padding:5%;font-size:130%;text-align:center;">Chef DePie's stupid waiters have managed to misplace a large number of pies inside his restaurant. <br /> The customers are waiting. Use WASD or arrows to move DePie.<br /> Find as many pies as you can as they appear before the timer runs out. <br /><br />Time Bonus: Every 3 pies served will convince your customers to wait another some more and will add 1 second to the clock.<br /><br /> Each pie gives a base score of 6 points.<br /><br />Perfect Catch:Follow a path of shortest number of steps for a perfect catch.<br /><br />Score Bonus:Combo perfect catches add bonus points to the scoreboard. <br /><br /> Score penalty: Imperfect catches gives a penalty of 1 point per extra step till point to be awarded becomes zero and also resets combo meter.<br /><br /> Pause: To pause game press Alt or switch to another tab or window.</div></div>
+        <div id="dialogstat"class="dialog1"><img style="width:2.5%;height:auto;position:absolute;top:0;right:0;" onclick="hideStat();" src="img/close.png" /><div id="txtarea" style="padding:5%;font-size:170%;text-align:center;"></div></div>
+</body>
+    </html>

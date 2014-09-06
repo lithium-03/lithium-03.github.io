@@ -1,0 +1,223 @@
+﻿body
+{
+    background-color:#BAF7FF;
+    padding:0;
+    margin:0;
+    font-family:'Segoe UI';
+    width:250%;
+    overflow:hidden;
+}
+a
+{
+    color:black;
+	text-decoration:none;
+}
+#pagecontainer
+{
+    width:100%;
+}
+.page
+{
+    width:0px;
+    height:0px;
+    position:absolute;
+    top:0;
+}
+#homepage
+{
+    left:0;
+}
+#hometitle
+{
+    background-color:#CCB04D;
+    width:200%;
+    color:#505050;
+    font-size:xx-large;
+    font-weight:bold;
+    padding:10px;
+    text-transform:capitalize;
+}
+#gamemenu
+{
+    display:table-row;
+}
+.gameitem
+{
+    display:inline;
+    float:left;
+    margin:0px;
+    padding:10px;
+    font-size:xx-large;
+}
+.gameitem:nth-of-type(2n+1)
+{
+    background-color:#FFC77A;
+}
+.gameitem:nth-of-type(2n+2)
+{
+    background-color:#999586;
+}
+#menubar,#contentblock
+{
+    display:inline-block;
+    float:left;
+}
+#menubar
+{
+    width:20%;
+}
+#contentblock
+{
+    width:75%;
+    padding-left:5px;
+    padding-right:5px;
+    padding-top:10px;
+    overflow-y:auto;
+    max-height:0px;
+    margin-top:10px;
+}
+.menuitem
+{
+    margin:0;
+    padding:10px;
+    font-size:x-large;
+    background-color:#B24200;
+    display:block;
+    overflow-x:scroll;
+    white-space:nowrap;
+}
+.menuitem:nth-of-type(2n+1)
+{
+    background-color:#FFC77A;
+}
+.menuitem:nth-of-type(2n+2)
+{
+    background-color:#999586;
+}
+.menuhighlighted
+{
+    border-right:10px solid white;
+}
+#statsblock,#instructions
+{
+    background-color:#DEFFF5;
+    border-radius:5px;
+    margin-bottom:20px;
+    margin-left:5px;
+    padding:10px;
+    font-size:large;
+}
+#statsblock,#instructions,#hometitle
+{
+    box-shadow:#B0A3AA 3px 3px;
+}
+#flipcontainer
+{
+    padding:10px;
+}
+.fliplabel
+{
+    font-weight:bold;
+    font-size:120%;
+    text-transform:uppercase;
+}
+.label
+{
+    opacity:0;
+    font-family:'Comic Sans MS';
+    position:absolute;
+    top:40%;
+    left:0;
+}
+.perfect
+{
+    color:yellow;
+}
+.bonus
+{
+    color:red;
+}
+.combo
+{
+    color:blue;
+}
+.cell
+{
+    border:3px solid white;
+    border-radius:3px;
+    background:url(/img/restaurant.png);
+    background-position:center;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:table-cell;
+}
+.row,#row1,#row2
+{
+    display:table-row;
+}
+.gridcontainer,#onscreenbuttons
+{
+    display:table;
+}
+#chef
+{
+    background:url(/img/chef.png);
+}
+#pie
+{
+    background:url(/img/pie.png);
+}
+#chef,#pie
+{
+    position:absolute;
+    border:3px solid #CCB04D;
+    border-radius:1000px;
+    background-position:center;
+    background-size:contain;
+    background-repeat:no-repeat;
+}
+#matrix,#flipcontainer
+{
+    display:inline-block;
+}
+#matrix
+{
+    float:left;
+    padding:10px;
+}
+#flipcontainer
+{
+    float:right;
+    background-color:rgba(212, 137, 137, 0.50);
+}
+#onscreenbuttons
+{
+    position:fixed;
+    right:3px;
+    bottom:3px;
+
+}
+.touchnull,.touchbutton
+{
+    width:75px;
+    height:75px;
+    display:table-cell;
+}
+.touchbutton
+{
+    border:1px solid gray;
+    border-radius:10px;
+    text-align:center;
+    font-size:300%;
+    margin:7px;
+    box-shadow:#B0A3AA -4px -4px inset;
+    background-color:rgba(222,255,245,0.4);
+    z-index:999;
+    cursor:pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

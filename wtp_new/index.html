@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" 
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="jquery.flipcountdown.css" />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/jquery-ui.min.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/social.js"></script>
+    <script src="js/cookiecontrol.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.flipcountdown.js"></script>
+    <script src="js/jquery.keycombo.js"></script>
+    <title>
+        Where's the Pie?
+    </title>
+</head>
+<body onmousewheel="return false;">
+    <div id="pagecontainer">
+        <div id="homepage" class="page">
+            <div id="hometitle">
+                Where's the pie?
+            </div>
+            <div id="menubar">
+                <a class="menuitem" href="#gamepage" onclick="newGame();">
+                    <div>
+                        New Game
+                    </div>
+                </a>
+                <a class="menuitem" href="#statsblock" onclick="highlight('#statsblock');">
+                    <div>
+                        Stats
+                    </div>
+                </a>
+                <a class="menuitem" href="#instructions" onclick="highlight('#instructions');">
+                    <div>
+                        Instructions
+                    </div>
+                </a>
+            </div>
+            <div id="contentblock">
+                <div id="instructions">
+                    Chef DePie's stupid waiters have managed to misplace a large number of pies inside his restaurant. <br /> The customers are waiting. Use WASD or arrows or on-screen buttons to move DePie.<br /> Find as many pies as you can as they appear before the timer runs out. <br /><br />Time Bonus: Every 3 pies served will convince your customers to wait another some more and will add 1 second to the clock.<br /><br /> Each pie gives a base score of 6 points.<br /><br />Perfect Catch:Follow a path of shortest number of steps for a perfect catch.<br /><br />Score Bonus:Combo perfect catches add bonus points to the scoreboard. <br /><br /> Score penalty: Imperfect catches gives a penalty of 1 point per extra step till point to be awarded becomes zero and also resets combo meter.<br /><br /> Pause: To pause game press Alt or switch to another tab or window.
+                </div>
+                <div id="statsblock"></div> 
+            </div>
+        </div>
+        <div id="gamepage" class="page">
+            <div id="gamemenu">
+                <a href="#homepage" class="gameitem" onclick="endGame();">
+                    <div>
+                        Back
+                    </div>
+                </a>
+                <a class ="gameitem">
+                    <div>
+                        Restart
+                    </div>
+                </a>
+                <a class="gameitem">
+                    <div>
+                        Pause
+                    </div>
+                </a>
+            </div>
+            <div id="flipcontainer">
+                <div class="fliplabel" id="timelabel">Time:</div>
+                <div id="time"></div>
+                <div class ="fliplabel" id="scorelabel">Score:</div>
+                <div id="scoreboard"></div>
+            </div>
+            <div id="onscreenbuttons">
+                <div id="row1">
+                    <div class="touchnull"></div>
+                    <div class="touchbutton" id="up" onclick="touchHandler('up');">&uArr;</div>
+                    <div class="touchnull"></div>
+                </div>
+                <div id="row2">
+                    <div class="touchbutton" id="left" onclick="touchHandler('left');">&lArr;</div>
+                    <div class="touchbutton" id="down" onclick="touchHandler('down');">&dArr;</div>
+                    <div class="touchbutton" id="right" onclick="touchHandler('right');">&rArr;</div>
+                </div>
+            </div>
+            <div id="readydialog"></div>
+            <div id="gameover"></div>
+            <div id="matrix">
+                <div class="gridcontainer">
+                    <div class="row" id="a">
+                        <div class="cell" id="11"></div>
+                        <div class="cell" id="12"></div>
+                        <div class="cell" id="13"> </div>
+                        <div class="cell" id="14"></div>
+                    </div>
+                    <div class="row" id="b">
+                        <div class="cell" id="21"></div>
+                        <div class="cell" id="22"></div>
+                        <div class="cell" id="23"></div>
+                        <div class="cell" id="24"></div>
+                    </div>
+                    <div class="row" id="c">
+                        <div class="cell" id="31"></div>
+                        <div class="cell" id="32"></div>
+                        <div class="cell" id="33"></div>
+                        <div class="cell" id="34"></div>
+                    </div>
+                    <div class="row" id="d">
+                        <div class="cell" id="41"></div>
+                        <div class="cell" id="42"></div>
+                        <div class="cell" id="43"></div>
+                        <div class="cell" id="44"></div>
+                    </div>
+                </div>
+                <div id="pie"></div>
+                <div id="chef">
+                    <div class="label perfect"></div>
+                    <div class="label combo"></div>
+                    <div class="label bonus"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

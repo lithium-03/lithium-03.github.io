@@ -1,0 +1,82 @@
+/*Arrow*/
+.jssora03l, .jssora03r, .jssora03ldn, .jssora03rdn 
+{
+    position: absolute;
+    cursor: pointer;
+    display: block;
+    background: url(../img/arrow1.png) no-repeat;
+    overflow: hidden;
+}
+.jssora03l 
+{
+    background-position: -3px -33px;
+}
+.jssora03r 
+{
+    background-position: -63px -33px;
+}
+.jssora03l:hover 
+{
+    background-position: -123px -33px;
+}
+.jssora03r:hover 
+{
+    background-position: -183px -33px;
+}
+.jssora03ldn 
+{
+    background-position: -243px -33px;
+}
+.jssora03rdn 
+{
+    background-position: -303px -33px;
+}
+/*Thumbnail*/
+.jssort07 .i 
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100px;
+    height: 50px;
+    filter: alpha(opacity=80);
+    opacity: .8;
+}
+.jssort07 .p:hover .i, .jssort07 .pav .i
+{
+    filter: alpha(opacity=100);
+    opacity: 1;
+}
+.jssort07 .o 
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100px;
+    height: 50px;
+    border: 1px solid #000;
+    transition: border-color .6s;
+    -moz-transition: border-color .6s;
+    -webkit-transition: border-color .6s;
+    -o-transition: border-color .6s;
+}
+* html .jssort07 .o 
+{
+    width: 100px;
+    height: 50px;
+}
+.jssort07 .pav .o, .jssort07 .p:hover .o 
+{
+    border-color: #fff;
+}
+.jssort07 .pav:hover .o 
+{
+    border-color: #0099FF;
+}
+.jssort07 .p:hover .o 
+{
+    transition: none;
+    -moz-transition: none;
+    -webkit-transition: none;
+    -o-transition: none;
+}

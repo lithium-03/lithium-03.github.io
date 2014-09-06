@@ -1,0 +1,9 @@
+User-agent: *
+Disallow:/img/
+Disallow:/psdtohtml/
+Disallow:/game0.html
+Disallow:/game1.html
+Disallow:/.git/
+Disallow:/*/img/
+Disallow:/*/mob/
+Disallow:/pp/q/

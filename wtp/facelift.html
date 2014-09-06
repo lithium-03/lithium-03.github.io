@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="en" 
+      xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <title>
+        Where's the Pie?
+    </title>
+    <meta charset="utf-8" />
+    <meta property="og:title" content="Where's the Pie?" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://lithium-03.github.io/game0.html" />
+    <meta property="og:image" content="http://lithium-03.github.io/img/red.png" />
+    <meta property="og:site_name" content="Where's the Pie?" />
+    <meta property="fb:admins" content="lithium-03.nidhin" />
+    <meta http-equiv="Cache-Control" content="must-revalidate" />
+    <meta property="og:description" content="A optimum-path planning game.Collect as many pies as you can." />
+    <meta name="author" content="Nidhin">
+    <meta name="description" content="An entertaining optimum-path planning game. Play as Chef DePie and collect as many pies as you can." />
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="js/social.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+<body onload ="loadStat();">
+    <div id="homepage">
+        <div id="fb-root"></div>
+        <div class="header">
+            <b>Where's the Pie?</b>
+        </div>
+        <div class="social">
+            <span class="fb-like" data-href="http://lithium-03.github.io/game1.html" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true">
+            </span>
+            <span >
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://lithium-03.github.io/wtp/" data-text="A optimum-path planning game.Collect as many pies as you can." data-via="nidhin_iitkgp">
+                    Tweet
+                </a>
+            </span>
+            <br />
+        </div>
+        <br />
+        <div id="options">
+            <a href="#gamepage">
+                <div id="new" class="option">
+                    New Game
+                </div>
+            </a>
+            <a href="http://lithium-03.github.io/">
+                <div id="bk" class="option">
+                </div>
+            </a>
+            <div id="ins" class="option">
+                Instructions
+            </div>
+            <div id="stat" class="option">
+                Stats
+            </div>
+        </div>
+        <div id="dialog" class="dialog1">
+            <img  onclick="hideIns();" src="img/close.png" />
+            <div>
+                Chef DePie's stupid waiters have managed to misplace a large number of pies inside his restaurant. <br />
+                The customers are waiting. Use WASD or arrows to move DePie.<br />
+                Find as many pies as you can as they appear before the timer runs out. <br /><br />
+                Time Bonus: Every 3 pies served will convince your customers to wait another some more and will add 1 second to the clock.
+                <br /><br /> Each pie gives a base score of 6 points.
+                <br /><br />Perfect Catch:Follow a path of shortest number of steps for a perfect catch.
+                <br /><br />Score Bonus:Combo perfect catches add bonus points to the scoreboard.
+                <br /><br /> Score penalty: Imperfect catches gives a penalty of 1 point per extra step till point to be awarded becomes zero and also resets combo meter.
+                <br /><br /> Pause: To pause game press Alt or switch to another tab or window.
+            </div>
+        </div>
+        <div id="dialogstat" class="dialog1">
+            <img onclick="hideStat();" src="img/close.png" />
+            <div id="txtarea">
+            </div>
+        </div>
+    </div>
+    <a name="g"></a>
+    <div id="gamepage">
+        <a href="#homepage">
+            <div id="w">
+            Back
+            </div>
+        </a>
+        <br />
+        <div id="q" onclick="history.go(0); return true;" >
+            Restart
+        </div>
+        <div style="background-color: black; width: 100%; height: 100%; visibility: hidden; z-index: 10; position: absolute; top: 0; left: 0; " id="status"><img src="img/pause.png" style="padding:0;margin:0;position:absolute; top:30%;left:40%;" /><div style="position:absolute;right:0;bottom:0;">&nbsp;</div></div>
+        <div>
+            <span class="fb-like" data-href="http://lithium-03.github.io/game1.html" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true">
+            </span>
+            <span>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://lithium-03.github.io/wtp/" data-text="A optimum-path planning game.Collect as many pies as you can." data-via="nidhin_iitkgp">Tweet</a>
+            </span><br />
+        </div>
+        <br />
+        <span id="matrix">
+            <img class="tile" id="0" src="img/gray.png" />
+            <img class="tile" id="1" src="img/gray.png" />
+            <img class="tile" id="2" src="img/gray.png" />
+            <img class="tile" id="3" src="img/gray.png" /><br />
+            <img class="tile" id="4" src="img/gray.png" />
+            <img class="tile" id="5" src="img/gray.png" />
+            <img class="tile" id="6" src="img/gray.png" />
+            <img class="tile" id="7" src="img/gray.png" /><br />
+            <img class="tile" id="8" src="img/gray.png" />
+            <img class="tile" id="9" src="img/gray.png" />
+            <img class="tile" id="10" src="img/gray.png" />
+            <img class="tile" id="11" src="img/gray.png" /><br />
+            <img class="tile" id="12" src="img/gray.png" />
+            <img class="tile" id="13" src="img/gray.png" />
+            <img class="tile" id="14" src="img/gray.png" />
+            <img class="tile" id="15" src="img/gray.png" /><br />
+        </span>
+        <div id="messages">
+        <span class="msg" id="combo">
+        </span>
+        <span class="msg" id="ti">
+        </span>
+        <span class="msg" id="perfect">
+            Perfect!
+        </span>
+        </div>
+        <div id="time">
+            <img class="flop" id='td3' src="img/1.png" />
+            <img class="flop" id='td2' src="img/2.png" />
+            <img class="flop" id='td1' src="img/0.png" />
+        </div>
+        <div id="score">
+            <img class="flop" id='d5' src="img/0.png" />
+            <img class="flop" id='d4' src="img/0.png" />
+            <img class="flop" id='d3' src="img/0.png" />
+            <img class="flop" id='d2' src="img/0.png" />
+            <img class="flop" id='d1' src="img/0.png" />
+        </div>
+    </div>
+</body>
+</html>

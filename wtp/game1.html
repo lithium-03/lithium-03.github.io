@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:og="http://ogp.me/ns#"
+      xmlns:fb="https://www.facebook.com/2008/fbml">
+<head>
+    <title>
+        Where's the Pie?
+    </title>
+    <meta property="og:title" content="Where's the Pie?" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://lithium-03.github.io/game0.html" />
+    <meta property="og:image" content="http://lithium-03.github.io/img/red.png" />
+    <meta property="og:site_name" content="Where's the Pie?" />
+    <meta property="fb:admins" content="lithium-03.nidhin" />
+    <meta http-equiv="Cache-Control" content="must-revalidate" />
+    <meta name="description" content="An entertaining optimum-path planning game. Play as Chef DePie and collect as many pies as you can." />
+    <meta property="og:description" content="A optimum-path planning game.Collect as many pies as you can." />
+    <meta name="author" content="Nidhin">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="js/social.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+<body onload="checkmobile();" style="overflow: hidden !important;position:fixed;background-color:#00aca6 !important; padding:0;">
+    <div id="fb-root"></div>
+    <style>
+        #messages {
+            position: absolute;
+            left: 32%;
+            top: 57%;
+            width: 100%;
+        }
+
+        .msg {
+            position: absolute;
+            font-family: 'Comic Sans MS';
+            visibility: hidden;
+            font-size: 150%;
+            width: 100%;
+        }
+
+        #combo {
+            color: yellow;
+        }
+
+        #ti {
+            color: red;
+        }
+
+        #perfect {
+            color: blue;
+        }
+    </style>
+    <div>
+        <a href="index.html"><img id="w" onmouseover="$('#w').attr('src', 'img/bk1.png');" onmouseout="$('#w').attr('src','img/back.png')" src="img/back.png"></a><br />
+        <img id="q" src="img/re.png" onmouseover="$('#q').attr('src', 'img/re1.png');" onmouseout="$('#q').attr('src','img/re.png')" onclick="history.go(0); return true;" />
+        <div style="background-color: black; width: 100%; height: 100%; visibility: hidden; z-index: 10; position: absolute; top: 0; left: 0; " id="status"><img src="img/pause.png" style="padding:0;margin:0;position:absolute; top:30%;left:40%;" /><div style="position:absolute;right:0;bottom:0;">&nbsp;</div></div>
+        <div style="position:absolute; left:30%; top:15%;">
+            <span class="fb-like" data-href="http://lithium-03.github.io/game1.html" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true">
+            </span>
+            <span>
+                <br />
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://lithium-03.github.io/wtp/" data-text="A optimum-path planning game.Collect as many pies as you can." data-via="nidhin_iitkgp">Tweet</a>
+            </span><br />
+        </div>
+        <br />
+        <span id="matrix">
+            <img class="tile" id="0" src="img/gray.png" />
+            <img class="tile" id="1" src="img/gray.png" />
+            <img class="tile" id="2" src="img/gray.png" />
+            <img class="tile" id="3" src="img/gray.png" /><br />
+            <img class="tile" id="4" src="img/gray.png" />
+            <img class="tile" id="5" src="img/gray.png" />
+            <img class="tile" id="6" src="img/gray.png" />
+            <img class="tile" id="7" src="img/gray.png" /><br />
+            <img class="tile" id="8" src="img/gray.png" />
+            <img class="tile" id="9" src="img/gray.png" />
+            <img class="tile" id="10" src="img/gray.png" />
+            <img class="tile" id="11" src="img/gray.png" /><br />
+            <img class="tile" id="12" src="img/gray.png" />
+            <img class="tile" id="13" src="img/gray.png" />
+            <img class="tile" id="14" src="img/gray.png" />
+            <img class="tile" id="15" src="img/gray.png" /><br />
+            <img src="img/yellow.png" style="visibility:hidden;">
+            <img src="img/red.png" style="visibility:hidden;">
+        </span>
+        <div id="messages"><span class="msg" id="combo"></span><span class="msg" id="ti"></span><span class="msg" id="perfect">Perfect!</span></div>
+        <div id="time"><img class="flop" id='td3' src="img/1.png" /><img class="flop" id='td2' src="img/2.png" /><img class="flop" id='td1' src="img/0.png" /></div><br />
+        <div id="score"><img class="flop" id='d5' src="img/0.png" /><img class="flop" id='d4' src="img/0.png" /><img class="flop" id='d3' src="img/0.png" /><img class="flop" id='d2' src="img/0.png" /><img class="flop" id='d1' src="img/0.png" /></div>
+        <img src="img/re1.png" style="visibility:hidden;">
+        <img src="img/bk1.png" style="visibility:hidden;">
+    </div>
+    <script>
+    var yellow,
+            yellowprev,
+            sec,
+            score,
+            red,
+            redprev,
+            pathLength,
+            optimum,
+            counter,
+            timeRate,
+            cons,
+            comboMax;
+    var highScore,
+        highBat,
+        longestCombo;
+    function checkCookie() {
+        var scorest = getCookie("scorest");
+        if (scorest != "") {
+            var arr = scorest.split('|');
+            highScore = Number(arr[0]);
+            highBat = Number(arr[1]);
+            longestCombo = Number(arr[2]);
+        }
+        else {
+            highScore = 0;
+            highBat = 0;
+            longestCombo = 0;
+            scorest = "0|0|0";
+            setCookie("scorest", scorest, 100);
+        }
+    }
+    function setCookie(cname, cvalue, ex) {
+        var d = new Date();
+        d.setTime(d.getTime() + (ex * 365 * 24 * 60 * 60 * 1000));
+        var expires = "expires=" + d.toGMTString();
+        document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+    }
+    function getCookie(cname) {
+        var name = cname + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i].trim();
+            if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+        }
+        return "";
+    }
+    function init() {
+        yellowprev = yellow = Math.floor(Math.random() * 16);
+        while (yellow == yellowprev) {
+            yellow = Math.floor(Math.random() * 16);
+        }
+        redprev = red = yellow
+        while (yellow == red) {
+            red = Math.floor(Math.random() * 16);
+        }
+        sec = 120;
+        score = 0;
+        pathLength = 0;
+        counter = 0;
+        cons = 0;
+        timeRate = 1000;
+        comboMax = 0;
+        setOptimum();
+        update();
+    }
+    init();
+    function cmnt() {
+        if (score < 2000) return 'D';
+        if (score < 5000) return 'C';
+        if (score < 8000) return 'B';
+        if (score < 10000) return 'A';
+        if (score < 15000) return 'S';
+        if (score < 20000) return 'SS';
+        return 'SSS';
+    }
+    function setOptimum() {
+        return optimum = Math.abs((red % 4) - (redprev % 4)) + Math.abs(Math.floor(red / 4) - Math.floor(redprev / 4));
+    }
+    function drawsc() {
+        document.getElementById('d1').src = "img/" + String(score % 10) + ".png";
+        document.getElementById('d2').src = "img/" + String((Math.floor(score / 10)) % 10) + ".png";
+        document.getElementById('d3').src = "img/" + String((Math.floor(score / 100)) % 10) + ".png";
+        document.getElementById('d4').src = "img/" + String((Math.floor(score / 1000)) % 10) + ".png";
+        document.getElementById('d5').src = "img/" + String((Math.floor(score / 10000)) % 10) + ".png";
+    }
+    function drawtime() {
+        document.getElementById('td3').src = "img/" + String((Math.floor(sec / 100)) % 10) + ".png";
+        document.getElementById('td2').src = "img/" + String((Math.floor(sec / 10)) % 10) + ".png";
+        document.getElementById('td1').src = "img/" + String(sec % 10) + ".png";
+    }
+    function update() {
+        document.getElementById(String(yellowprev)).src = "img/gray.png";
+        document.getElementById(String(yellow)).src = "img/yellow.png";
+        if (yellow != red)
+            document.getElementById(String(red)).src = "img/red.png";
+    }
+    function setnew() {
+        redprev = red;
+        while (yellow == red) {
+            red = Math.floor(Math.random() * 16);
+        }
+        setOptimum();
+        update();
+    }
+    function changeCombo(combo) {
+        $('#combo').text('Combo ' + String(combo)).css({ 'bottom': '0', 'opacity': '1', 'visibility': 'visible' }).animate({ bottom: '60px', opacity: '0' }, 600);
+    }
+    function changeTi(x) {
+        $('#ti').text('Time+' + String(x)).css({ 'bottom': '0', 'opacity': '1', 'visibility': 'visible' }).animate({ bottom: '60px', opacity: '0' }, 1200);
+    }
+    function changePerfect() {
+        $('#perfect').css({ 'bottom': '0', 'opacity': '1', 'visibility': 'visible' }).animate({ bottom: '60px', opacity: '0' }, 300);
+    }
+    function moveLeft() { yellow--; pathLength++; }
+    function moveUp() { yellow -= 4; pathLength++; }
+    function moveRight() { yellow++; pathLength++; }
+    function moveDown() { yellow += 4; pathLength++; }
+    jQuery(document).ready(function () {
+        var secTimer = window.setInterval(function () {
+            sec--;
+            drawtime();
+            if (sec == 0) die();
+        }, timeRate);
+        function die() {
+            clearInterval(secTimer);
+            document.removeEventListener('keydown', key);
+            window.setTimeout(function () {
+                checkCookie();
+                alert('Time up!! You found ' + String(counter) + ' pies, and scored ' + String(score) + 'points\n Rating:' + cmnt());
+                if (score > highScore || counter > highBat || comboMax > longestCombo) {
+                    var scorest;
+                    if (score > highScore)
+                        alert("New personal best!!: " + String(score));
+                    scorest = String(Math.max(score, highScore)) + "|" + String(Math.max(counter, highBat)) + "|" + String(Math.max(comboMax, longestCombo));
+                    setCookie("scorest", scorest, 100);
+                }
+                window.location.assign("index.html");
+            }, 100);
+        }
+        var vis = (function () {
+            var stateKey,
+                eventKey,
+                keys = {
+                    hidden: "visibilitychange",
+                    webkitHidden: "webkitvisibilitychange",
+                    mozHidden: "mozvisibilitychange",
+                    msHidden: "msvisibilitychange"
+                };
+            for (stateKey in keys) {
+                if (stateKey in document) {
+                    eventKey = keys[stateKey];
+                    break;
+                }
+            }
+            return function (c) {
+                if (c) document.addEventListener(eventKey, c);
+                return !document[stateKey];
+            }
+        })();
+        var notIE = (document.documentMode === undefined),
+            isChromium = window.chrome;
+        if (notIE && !isChromium) {
+            $(window).on("focusin", function () {
+                $('#status').css("visibility", 'hidden');
+                secTimer = window.setInterval(function () {
+                    sec--;
+                    drawtime();
+                    if (sec == 0) die();
+                }, timeRate);
+            }).on("focusout", function () {
+                $('#status').css("visibility", 'visible');
+                clearInterval(secTimer);
+            });
+        }
+        else {
+            if (window.addEventListener) {
+                window.addEventListener("focus", function (event) {
+                    $('#status').css("visibility", 'hidden');
+                    secTimer = window.setInterval(function () {
+                        sec--;
+                        drawtime();
+                        if (sec == 0) die();
+                    }, timeRate);
+                }, false);
+                window.addEventListener("blur", function (event) {
+                    $('#status').css("visibility", 'visible');
+                    clearInterval(secTimer);
+                }, false);
+            }
+            else {
+                window.attachEvent("focus", function (event) {
+                    $('#status').css("visibility", 'hidden');
+                    secTimer = window.setInterval(function () {
+                        sec--;
+                        drawtime();
+                        if (sec == 0) die();
+                    }, timeRate);
+                });
+                window.attachEvent("blur", function (event) {
+                    $('#status').css("visibility", 'visible');
+                    clearInterval(secTimer);
+                });
+            }
+        }
+        var str = '';
+        function key(event) {
+            if ((event.keyCode >= 37 && event.keyCode <= 40) || event.keyCode == 65 || event.keyCode == 87 || event.keyCode == 68 || event.keyCode == 83) {
+                yellowprev = yellow;
+                if ((event.keyCode == 37 || event.keyCode == 65) && yellow % 4) moveLeft();
+                else if ((event.keyCode == 38 || event.keyCode == 87) && yellow > 3) moveUp();
+                else if ((event.keyCode == 39 || event.keyCode == 68) && yellow % 4 != 3) moveRight();
+                else if ((event.keyCode == 40 || event.keyCode == 83) && yellow < 12) moveDown();
+                update();
+                if (yellow == red && yellowprev != yellow) {
+                    counter++;
+                    var awarded = 6 + optimum - pathLength;
+                    if (awarded < 0) awarded = 0;
+                    if (awarded == 6) {
+                        awarded += cons;
+                        if (cons > 0) changeCombo(cons);
+                    }
+                    score += awarded;
+                    if (counter % 3 == 0) {
+                        sec++;
+                        var s = Math.round(cons / 200);
+                        if (counter % 15 == 0 && cons > 100)
+                            sec += s;
+                        changeTi(s + 1);
+                        drawtime();
+                    }
+                    if (optimum == pathLength) { cons++; changePerfect(); }
+                    else { if (cons > comboMax) comboMax = cons; cons = 0; }
+                    drawsc();
+                    setnew();
+                    pathLength = 0;
+                    setOptimum();
+                }
+            }
+            else if (event.keyCode >= 65 && event.keyCode <= 90) {
+                str = str + String.fromCharCode(event.keyCode);
+                if (str.substring(str.length - 9, str.length) === 'MOVEBITCH') {
+                    timeRate = 5;
+                    str = '';
+                    clearInterval(secTimer);
+                    secTimer = window.setInterval(function () {
+                        sec--;
+                        drawtime();
+                        if (sec == 0) die();
+                    }, timeRate);
+                }
+                else if (str.substring(str.length - 9, str.length) === 'POINTME') {
+                    timeRate = 50;
+                    str = '';
+                    clearInterval(secTimer);
+                    secTimer = window.setInterval(function () {
+                        sec--;
+                        drawtime();
+                        if (sec == 0) die();
+                    }, timeRate);
+                }
+            }
+        }
+        document.addEventListener('keydown', key);
+    });
+    </script>
+</body>
+</html>

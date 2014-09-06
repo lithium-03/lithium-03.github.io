@@ -1,0 +1,140 @@
+body
+{
+    background-image:url(img/bk1.jpg);
+}
+.menu
+{
+    text-align:right;
+    background-color:aquamarine;
+    padding:0.5%;
+    font-family:Verdana,Arial,cursive;
+    font-size:large;
+    font-weight:bold;
+    margin-top:0px;
+}
+#contact
+{
+    text-align:center;
+    background-color:tan;
+    margin-top:0px;
+    margin-left:25%;
+    margin-right:25%;
+    padding-top:13%;
+    padding-bottom:12%;
+}
+form
+{
+    font-family:cursive,Verdana;
+    text-align:center;
+    font-size:large;
+    color:blue;
+    background-color:cornsilk;
+    margin-bottom:0px;
+    margin-left:25%;
+    margin-right:25%;
+    padding-top:2%;
+    padding-bottom:13%;
+}
+a.menubar
+{
+    color:black;
+}
+.title
+{
+    font-size:280%;
+    font-family:sans-serif,Arial;
+    color:black;
+    padding-top:5%;
+    padding-left:1%;
+    margin-bottom:0px;
+    background: -webkit-linear-gradient(left, white , aquamarine);
+    background: -o-linear-gradient(right, white , aquamarine);
+    background: -moz-linear-gradient(right, white , aquamarine);
+    background: linear-gradient(to right, white , aquamarine); 
+}
+.subtitle
+{
+    font-size:150%;
+    font-family:Verdana;
+    margin-left:15%;
+    color:blue;
+    margin-right:15%;
+    padding-left:4%;
+    padding-right:4%;
+    margin-bottom:0px;
+    padding-top:2%;
+    background-color:aliceblue;
+}
+.pgtxt
+{
+    padding:2%;
+    margin-left:15%;
+    margin-right:15%;
+    margin-top:0px;
+    padding-left:4%;
+    padding-right:4%;
+    background-color:aliceblue;
+    font-size:100%;
+    font-family:Verdana,Arial;
+}
+.pr
+{
+    height:auto;
+    margin:2%;
+}
+#dp
+{
+    margin:2%;
+    border-style:solid;
+    border-width:thin;
+    height:auto;
+    width:37.5%;
+}
+#score
+{
+    position:fixed;
+    top:70%;
+    left:4%;
+}
+img.tile 
+{       
+      width: 23% !important;
+      height: auto !important;
+}
+#matrix
+{
+    position:fixed !important;
+    width:50%;
+    top:3%;
+    left:45%;
+}
+.header 
+{
+    font-family: Arial;
+    position:fixed;
+    margin:25px;
+    text-align: center !important;
+}
+.back
+{
+    width:15%;
+    height:auto;
+    position:fixed;
+    top:4%;
+    left:5%;
+}
+.game
+{
+    width:50%;
+    height:auto;
+    position:fixed;
+    left:27%;
+}
+#bk
+{
+    top:55%;
+}
+#new
+{
+    top:25%;
+}

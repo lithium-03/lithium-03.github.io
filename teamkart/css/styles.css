@@ -1,0 +1,170 @@
+body
+{
+    background-color:#1b1b1b;
+    font-family:'Segoe UI';
+}
+#sidebar
+{
+    background-color:#b7363a;
+    height:100%;
+    width:15%;
+    min-width:210px;
+    display:inline-block;
+    vertical-align:top;
+}
+#sidebarmenu
+{
+    padding-bottom:100%;
+}
+#sidebarmenu ul a li
+{
+    border-bottom:1px solid white;
+    list-style:none;
+    padding-top:10px;
+    padding-bottom:10px;
+    font-size:medium;
+    font-weight:bold;
+    text-transform:uppercase;
+    color:#1b1b1b;
+}
+#sidebar
+{
+    height:100%;
+}
+#sidebarmenu ul
+{
+    padding:0;
+}
+#logo
+{
+    border-bottom:1px solid #1b1b1b;
+    padding-bottom:10px;
+}
+#logo img
+{
+    width:210px;
+    height:auto;
+    cursor:default;
+}
+.activemenuitem,.momenuitem
+{
+    background-color:rgba(255, 255, 255, 0.40);
+    cursor:pointer;
+}
+#contentblock
+{
+    width:55%;
+    min-width:750px;
+    position:relative;
+    top:30px;
+    display:inline-block;
+    vertical-align:top;
+}
+#slideshowouter
+{
+    border:1px solid white;
+    width:720px;
+    padding:10px;
+}
+.cb1
+{
+    border-bottom:1px solid #b7363a;
+    margin-bottom:10px;
+    padding-top:10px;
+    padding-bottom:10px;
+    margin-top:10px;
+    width:100%;
+    color:white;
+}
+.cb1 ul li
+{
+    list-style:square;
+}
+.cb2
+{
+    padding:5px;
+    position:relative;
+    margin:5px;
+}
+.cb2:nth-child(2n)
+{
+    border-right:1px solid #b7363a;
+    text-align:right;
+}
+.cb2:nth-child(2n+1)
+{
+    border-left:1px solid #b7363a;
+    text-align:left
+}
+.cbtitle
+{
+    text-transform:uppercase;
+    color:#b7363a;
+    font-size:xx-large;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+.cb2>.cbcontent
+{
+    font-size:small;
+    padding:0;
+}
+.cb2>.contact
+{
+    font-size:small;
+    font-style:italic;
+}
+.cb2>.cbtitle
+{
+    font-size:x-large;
+}
+.cbcontent,.cb1 ul li
+{
+    font-size:100%;
+    padding:10px;
+}
+#footer,#footer>a
+{
+    text-align:center;
+    font:x-small verdana,arial;
+    color:whitesmoke;
+    padding:5px;
+}
+.vspace
+{
+    height:100%;
+    width:5%;
+    display:inline-block;
+    vertical-align:top;
+}
+#sponsertitle
+{
+    text-transform:uppercase;
+    color:#b7363a;
+    width:5%;
+    font-size:x-large;
+    text-align:center;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+}
+#sponsorbar
+{
+    min-width:210px;
+    width:15%;
+    height:100%;
+    display:inline-block;
+    vertical-align:top;
+}
+#sponsorshowouter
+{
+    position:absolute;
+    right:0;
+}
+#label_sponsor
+{
+    position:absolute;
+    left:0px;
+    top:0;
+    padding:0;
+    margin:0;
+    color:#b7363a;
+    width:100%;
+}

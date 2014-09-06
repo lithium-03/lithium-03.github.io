@@ -1,0 +1,21 @@
+body
+{
+    background-color:#0094ff;
+    font-family:'Segoe UI';
+}
+.header
+{
+    height:10%;
+    width:100%;
+    font-size:xx-large;
+}
+#social
+{
+    padding:10px;
+    height:10%;
+}
+#options
+{
+    width:100%;
+    height:80%;
+}
