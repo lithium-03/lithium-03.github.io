@@ -152,6 +152,15 @@ function highlight(a,c,d)
             backgroundColor: c
         },d);
 }
+function changeCombo() {
+    $('.combo').text('Combo ' + String(cons)).css({ 'bottom': '0', 'opacity': '1', 'visibility': 'visible' }).animate({ bottom: '60px', opacity: '0' }, 800);
+}
+function changeTi(x) {
+    $('.bonus').text('Time+' + String(x)).css({ 'bottom': '0', 'opacity': '1', 'visibility': 'visible' }).animate({ bottom: '60px', opacity: '0' }, 1200);
+}
+function changePerfect() {
+    $('.perfect').text('Perfect!').css({ 'bottom': '0', 'opacity': '1', 'visibility': 'visible' }).animate({ bottom: '60px', opacity: '0' }, 600);
+}
 $(function () {
     $('a[href*=#]:not([href=#])').click(function () {
         if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {

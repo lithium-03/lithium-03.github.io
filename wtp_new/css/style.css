@@ -124,14 +124,16 @@ a
 .label
 {
     opacity:0;
-    font-family:'Comic Sans MS';
+    font-family: 'Amatic SC', cursive;
+    font-size:xx-large;
+    font-weight:700;
     position:absolute;
-    top:40%;
-    left:0;
+    bottom:60%;
+    left:25%;
 }
 .perfect
 {
-    color:yellow;
+    color:green;
 }
 .bonus
 {

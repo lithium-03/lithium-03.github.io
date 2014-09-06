@@ -1,7 +1,6 @@
 var time,
     score = 0,
     chef=0,
-    chefprev,
     pie=0,
     pieprev,
     pathLength,
@@ -18,9 +17,7 @@ function newGame()
     initCounters('lg');
     pageStatus = 'game';
     $('#onscreenbuttons').show('slide', { direction: 'bottom' }, 1000);
-    chef = chefprev = Math.floor(Math.random() * 16);
-    while (chef === chefprev)
-        chef = Math.floor(Math.random() * 16);
+    chef = Math.floor(Math.random() * 16);
     pieprev = pie = chef;
     while (chef == pie)
         pie = Math.floor(Math.random() * 16);
@@ -48,7 +45,6 @@ function controller(event)
 {
     if ((event.keyCode >= 37 && event.keyCode <= 40) || event.keyCode == 65 || event.keyCode == 87 || event.keyCode == 68 || event.keyCode == 83)
     {
-        chefprev = chef;
         if (event.keyCode == 37 || event.keyCode == 65)
             move('left');
         else if (event.keyCode == 38 || event.keyCode == 87)
@@ -57,9 +53,8 @@ function controller(event)
             move('right');
         else if (event.keyCode == 40 || event.keyCode == 83)
             move('down');
-    }
     checkCapture();
-    return event;
+    }
 }
 function touchHandler(direction)
 {
@@ -82,29 +77,31 @@ function touchHandler(direction)
     }
     $(window).trigger(event);
 }
+
 function checkCapture()
 {
-    if (chef == pie && chefprev != chef) {
+    if (chef == pie) {
         counter++;
         awarded = 6 + optimum - pathLength;
         if (awarded < 0) awarded = 0;
         if (awarded == 6) {
             awarded += cons;
-            //if (cons > 0) changeCombo(cons);
+            if (cons > 0) changeCombo(cons);
         }
         score += awarded;
         if (counter % 3 == 0) {
             addTime();
+            var s=0;
             if (counter % 15 == 0 && cons > 100)
             {
                 s = Math.round(cons / 200);
                 addTime(s);
             }
-            //changeTi(s + 1);
+            changeTi(s + 1);
         }
         if (optimum == pathLength) {
             cons++;
-            //changePerfect(); 
+            changePerfect(); 
         }
         else
         {
@@ -115,6 +112,7 @@ function checkCapture()
         setnew();
         pathLength = 0;
         setOptimum();
+        return s + 1;
     }
 }
 function move(direction)
