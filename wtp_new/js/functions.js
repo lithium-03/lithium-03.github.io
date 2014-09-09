@@ -118,14 +118,25 @@ function checkCapture()
 function move(direction)
 {
     if (direction === 'left' && chef % 4)
-        chef--;
+        {
+            chef--;
+            pathLength++; 
+        }
     else if (direction === 'up' && chef > 3)
+    {
         chef -= 4;
+        pathLength++; 
+    }
     else if (direction === 'right' && chef % 4 != 3)
+    {
         chef++;
+        pathLength++; 
+    }
     else if (direction === 'down' && chef < 12)
+    {
         chef += 4;
-    pathLength++; 
+        pathLength++; 
+    }
     putChef();
 }
 function initCounters(a) {
