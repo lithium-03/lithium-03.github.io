@@ -47,22 +47,21 @@ $(document).ready(function ()
 });
 function snap()
 {
-    
     if(scrollX!=0&&scrollX!=width)
     {
     if (pageStatus == 'game')
-    $('body,html').css({
+    $('body,html').animate({
         scrollLeft: $('#gamepage').offset().left
-    });
+    },1);
     else
-    $('body,html').css({
+    $('body,html').animate({
         scrollLeft: 0
-    });
+    },1);
     }
     if(scrollY!=0)
-    $('body,html').css({
+    $('body,html').animate({
         scrollTop: 0
-    });
+    },1);
 }
 function readyrespond()
 {
