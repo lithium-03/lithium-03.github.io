@@ -50,16 +50,16 @@ function snap()
     if(scrollX!=0&&scrollX!=width)
     {
     if (pageStatus == 'game')
-    $('body,html').animate({
+    $('body,html').stop().animate({
         scrollLeft: $('#gamepage').offset().left
     },1);
     else
-    $('body,html').animate({
+    $('body,html').stop().animate({
         scrollLeft: 0
     },1);
     }
     if(scrollY!=0)
-    $('body,html').animate({
+    $('body,html').stop().animate({
         scrollTop: 0
     },1);
 }
