@@ -10,6 +10,7 @@ $(document).ready(function ()
     $('#onscreenbuttons').hide()
     setStats();
     respond();
+    window.setInterval(snap,250);
     $(window).bind('orientationchange resize', function () {
         rtime = new Date();
         if (timeout === false) {
@@ -44,6 +45,25 @@ $(document).ready(function ()
         onComplete: function () { timeRate=100; }
     });*/
 });
+function snap()
+{
+    
+    if(scrollX!=0&&scrollX!=width)
+    {
+    if (pageStatus == 'game')
+    $('body,html').css({
+        scrollLeft: $('#gamepage').offset().left
+    });
+    else
+    $('body,html').css({
+        scrollLeft: 0
+    });
+    }
+    if(scrollY!=0)
+    $('body,html').css({
+        scrollTop: 0
+    });
+}
 function readyrespond()
 {
     if (new Date() - rtime < delta)
@@ -66,10 +86,6 @@ function respond() {
     $('#gamepage').css({
         'left': String(width) + 'px'
     });
-    if (pageStatus == 'game')
-    $('body,html').animate({
-        scrollLeft: $('#gamepage').offset().left
-    },1);
     titleheight = pxtonum($('#hometitle').css('height'));
     contentblockheight = height - titleheight;
     $('#contentblock').css({ 'max-height': String(contentblockheight - 60) + 'px' });
