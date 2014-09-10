@@ -49,7 +49,7 @@ $(document).ready(function ()
 });
 function snap()
 {
-    if(scrollX!=0&&scrollX!=width)
+    if(scrollX!=0&&pageStatus=='home'||scrollX!=width&&pageStatus=='game')
     {
     if (pageStatus == 'game')
     $('body,html').stop().animate({
