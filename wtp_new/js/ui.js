@@ -21,6 +21,7 @@ $(document).ready(function ()
     $('body').animate({
         scrollLeft: 0
     }, 1);
+    $('.touchbutton').attr('onclick', 'touchHandler(this.id);');
     $('body').mousedown(function (e) {
         if (e.button == 1)
             return false;

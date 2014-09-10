@@ -28,6 +28,11 @@
                 
             </div>
             <div id="menubar">
+                <a class="menuitem" href="#gamepage" onclick="resume();">
+                    <div>
+                        Resume
+                    </div>
+                </a>
                 <a class="menuitem" href="#gamepage" onclick="newGame();">
                     <div>
                         New Game
@@ -67,7 +72,7 @@
                         Back
                     </div>
                 </a>
-                <a class ="gameitem">
+                <a class ="gameitem" id="restart" onclick="newGame();">
                     <div>
                         Restart
                     </div>
@@ -87,13 +92,13 @@
             <div id="onscreenbuttons">
                 <div id="row1">
                     <div class="touchnull"></div>
-                    <div class="touchbutton" id="up" onclick="touchHandler('up');">&uArr;</div>
+                    <div class="touchbutton" id="up">&uArr;</div>
                     <div class="touchnull"></div>
                 </div>
                 <div id="row2">
-                    <div class="touchbutton" id="left" onclick="touchHandler('left');">&lArr;</div>
-                    <div class="touchbutton" id="down" onclick="touchHandler('down');">&dArr;</div>
-                    <div class="touchbutton" id="right" onclick="touchHandler('right');">&rArr;</div>
+                    <div class="touchbutton" id="left">&lArr;</div>
+                    <div class="touchbutton" id="down">&dArr;</div>
+                    <div class="touchbutton" id="right">&rArr;</div>
                 </div>
             </div>
             <div id="readydialog"></div>
