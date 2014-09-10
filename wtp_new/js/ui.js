@@ -4,13 +4,14 @@ var rtime = new Date(1, 1, 2000, 12, 00, 00),
 var width,
     height,
     tileWidth,
-    flipSize;
+    flipSize,
+    d;
 $(document).ready(function ()
 {
     $('#onscreenbuttons').hide()
     setStats();
     respond();
-    window.setInterval(snap,250);
+    d=window.setInterval(snap,1000);
     $(window).bind('orientationchange resize', function () {
         rtime = new Date();
         if (timeout === false) {
@@ -185,9 +186,13 @@ $(function () {
             id=$(target).attr('id')
             if (id === 'homepage' || id === 'gamepage') {
                 if (target.length) {
+                    clearInterval(d);
+                    window.setTimeout(function () {
+                        d = window.setInterval(snap, 1000);
+                    }, 1000);
                     $('html,body').animate({
                         scrollLeft: target.offset().left
-                    }, 1000);
+                    }, 500);
                     return false;
                 }
             }
@@ -195,7 +200,7 @@ $(function () {
                 if (target.length) {
                     $('#contentblock').animate({
                         scrollTop: target.offset().top
-                    }, 1000);
+                    }, 500);
                     return false;
                 }
             }
