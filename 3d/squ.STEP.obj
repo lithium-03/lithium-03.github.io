@@ -1,0 +1,496 @@
+# file written by OpenSceneGraph
+
+mtllib squ.STEP.mtl
+
+
+o _Geometry_0
+
+v 228.6 762 12.7
+v 228.6 0 12.7
+v 0 762 12.7
+v 0 0 12.7
+# 4 elements written
+
+vn -0 -0 1
+vn -0 -0 1
+vn -0 -0 1
+vn -0 -0 1
+# 4 elements written
+
+vt -228.6 762
+vt -228.6 0
+vt 0 762
+vt 0 0
+# 4 elements written
+f 3/3/3 2/2/2 1/1/1 
+f 3/3/3 4/4/4 2/2/2 
+
+o _Geometry_1
+
+v 381 0 12.7
+v 381 762 12.7
+v 609.6 0 12.7
+v 609.6 762 12.7
+# 4 elements written
+
+vn -0 -0 1
+vn -0 -0 1
+vn -0 -0 1
+vn -0 -0 1
+# 4 elements written
+
+vt -381 0
+vt -381 762
+vt -609.6 0
+vt -609.6 762
+# 4 elements written
+f 6/6/6 5/5/5 7/7/7 
+f 6/6/6 7/7/7 8/8/8 
+
+o _Geometry_2
+
+v 0 762 0
+v 0 0 0
+v 0 0 12.7
+v 0 762 12.7
+# 4 elements written
+
+vn -1 -0 -0
+vn -1 -0 -0
+vn -1 -0 -0
+vn -1 -0 -0
+# 4 elements written
+
+vt 12.7 762
+vt 12.7 0
+vt 0 0
+vt 0 762
+# 4 elements written
+f 12/12/12 10/10/10 11/11/11 
+f 9/9/9 10/10/10 12/12/12 
+
+o _Geometry_3
+
+v 0 0 0
+v 609.6 0 0
+v 609.6 0 12.7
+v 381 0 12.7
+v 228.6 0 12.7
+v 0 0 12.7
+# 6 elements written
+
+vn -0 -1 -0
+vn -0 -1 -0
+vn -0 -1 -0
+vn -0 -1 -0
+vn -0 -1 -0
+vn -0 -1 -0
+# 6 elements written
+
+vt -12.7 0
+vt -12.7 609.6
+vt 0 609.6
+vt 0 381
+vt 0 228.6
+vt 0 0
+# 6 elements written
+f 17/17/17 18/18/18 13/13/13 
+f 15/15/15 16/16/16 14/14/14 
+f 14/14/14 17/17/17 13/13/13 
+f 14/14/14 16/16/16 17/17/17 
+
+o _Geometry_4
+
+v 609.6 0 0
+v 609.6 762 0
+v 609.6 762 12.7
+v 609.6 0 12.7
+# 4 elements written
+
+vn 1 -0 -0
+vn 1 -0 -0
+vn 1 -0 -0
+vn 1 -0 -0
+# 4 elements written
+
+vt -12.7 0
+vt -12.7 762
+vt 0 762
+vt 0 0
+# 4 elements written
+f 20/20/20 22/22/22 19/19/19 
+f 21/21/21 22/22/22 20/20/20 
+
+o _Geometry_5
+
+v 609.6 762 0
+v 0 762 0
+v 0 762 12.7
+v 228.6 762 12.7
+v 228.6 762 165.1
+v 381 762 165.1
+v 381 762 12.7
+v 609.6 762 12.7
+# 8 elements written
+
+vn -0 1 -0
+vn -0 1 -0
+vn -0 1 -0
+vn -0 1 -0
+vn -0 1 -0
+vn -0 1 -0
+vn -0 1 -0
+vn -0 1 -0
+# 8 elements written
+
+vt 12.7 609.6
+vt 12.7 0
+vt 0 0
+vt 0 228.6
+vt -152.4 228.6
+vt -152.4 381
+vt 0 381
+vt 0 609.6
+# 8 elements written
+f 26/26/26 24/24/24 25/25/25 
+f 29/29/29 26/26/26 27/27/27 
+f 29/29/29 27/27/27 28/28/28 
+f 23/23/23 29/29/29 30/30/30 
+f 24/24/24 29/29/29 23/23/23 
+f 24/24/24 26/26/26 29/29/29 
+
+o _Geometry_6
+
+v 0 762 0
+v 0 0 0
+v 609.6 762 0
+v 609.6 0 0
+# 4 elements written
+
+vn 0 0 -1
+vn 0 0 -1
+vn 0 0 -1
+vn 0 0 -1
+# 4 elements written
+
+vt 0 762
+vt 0 0
+vt -609.6 762
+vt -609.6 0
+# 4 elements written
+f 31/31/31 33/33/33 34/34/34 
+f 31/31/31 34/34/34 32/32/32 
+
+o _Geometry_7
+
+v 228.6 0 12.7
+v 228.6 -1016 12.7
+v 381 0 12.7
+v 381 -1016 12.7
+# 4 elements written
+
+vn 0 -0 -1
+vn 0 -0 -1
+vn 0 -0 -1
+vn 0 -0 -1
+# 4 elements written
+
+vt 228.6 0
+vt 228.6 -1016
+vt 381 0
+vt 381 -1016
+# 4 elements written
+f 37/37/37 36/36/36 35/35/35 
+f 37/37/37 38/38/38 36/36/36 
+
+o _Geometry_8
+
+v 228.6 762 12.7
+v 228.6 0 12.7
+v 228.6 -1016 12.7
+v 228.6 -1016 165.1
+v 228.6 762 165.1
+# 5 elements written
+
+vn -1 -1.24884e-016 0
+vn -1 -1.24884e-016 0
+vn -1 -1.24884e-016 0
+vn -1 -1.24884e-016 0
+vn -1 -1.24884e-016 0
+# 5 elements written
+
+vt 0 -152.4
+vt -762 -152.4
+vt -1778 -152.4
+vt -1778 0
+vt 0 0
+# 5 elements written
+f 40/40/40 41/41/41 42/42/42 
+f 43/43/43 39/39/39 40/40/40 
+f 43/43/43 40/40/40 42/42/42 
+
+o _Geometry_9
+
+v 228.6 -1016 12.7
+v 381 -1016 12.7
+v 381 -1016 165.1
+v 228.6 -1016 165.1
+# 4 elements written
+
+vn -0 -1 -0
+vn -0 -1 -0
+vn -0 -1 -0
+vn -0 -1 -0
+# 4 elements written
+
+vt -152.4 0
+vt -152.4 152.4
+vt 0 152.4
+vt 0 0
+# 4 elements written
+f 46/46/46 44/44/44 45/45/45 
+f 46/46/46 47/47/47 44/44/44 
+
+o _Geometry_10
+
+v 381 -1016 12.7
+v 381 0 12.7
+v 381 762 12.7
+v 381 762 165.1
+v 381 -1016 165.1
+# 5 elements written
+
+vn 1 1.24884e-016 -0
+vn 1 1.24884e-016 -0
+vn 1 1.24884e-016 -0
+vn 1 1.24884e-016 -0
+vn 1 1.24884e-016 -0
+# 5 elements written
+
+vt 1778 -152.4
+vt 762 -152.4
+vt 0 -152.4
+vt 0 0
+vt 1778 0
+# 5 elements written
+f 49/49/49 50/50/50 51/51/51 
+f 52/52/52 48/48/48 49/49/49 
+f 52/52/52 49/49/49 51/51/51 
+
+o _Geometry_11
+
+v 228.6 762 165.1
+v 228.6 -1016 165.1
+v 381 -1016 165.1
+v 381 762 165.1
+# 4 elements written
+
+vn -0 0 1
+vn -0 0 1
+vn -0 0 1
+vn -0 0 1
+# 4 elements written
+
+vt 228.6 762
+vt 228.6 -1016
+vt 381 -1016
+vt 381 762
+# 4 elements written
+f 56/56/56 53/53/53 54/54/54 
+f 56/56/56 54/54/54 55/55/55 
+
+o _Geometry_12
+
+v 228.6 762 12.7
+v 228.6 0 12.7
+# 2 elements written
+l 57/ 58/ 
+
+o _Geometry_13
+
+v 228.6 762 12.7
+v 0 762 12.7
+# 2 elements written
+l 59/ 60/ 
+
+o _Geometry_14
+
+v 0 762 12.7
+v 0 0 12.7
+# 2 elements written
+l 61/ 62/ 
+
+o _Geometry_15
+
+v 0 0 12.7
+v 228.6 0 12.7
+# 2 elements written
+l 63/ 64/ 
+
+o _Geometry_16
+
+v 381 0 12.7
+v 381 762 12.7
+# 2 elements written
+l 65/ 66/ 
+
+o _Geometry_17
+
+v 381 0 12.7
+v 609.6 0 12.7
+# 2 elements written
+l 67/ 68/ 
+
+o _Geometry_18
+
+v 609.6 0 12.7
+v 609.6 762 12.7
+# 2 elements written
+l 69/ 70/ 
+
+o _Geometry_19
+
+v 609.6 762 12.7
+v 381 762 12.7
+# 2 elements written
+l 71/ 72/ 
+
+o _Geometry_20
+
+v 0 762 0
+v 0 0 0
+# 2 elements written
+l 73/ 74/ 
+
+o _Geometry_21
+
+v 0 0 12.7
+v 0 0 1.77636e-015
+# 2 elements written
+l 75/ 76/ 
+
+o _Geometry_22
+
+v 0 762 12.7
+v 0 762 1.77636e-015
+# 2 elements written
+l 77/ 78/ 
+
+o _Geometry_23
+
+v 0 0 0
+v 609.6 0 0
+# 2 elements written
+l 79/ 80/ 
+
+o _Geometry_24
+
+v 609.6 0 12.7
+v 609.6 0 1.77636e-015
+# 2 elements written
+l 81/ 82/ 
+
+o _Geometry_25
+
+v 228.6 0 12.7
+v 381 0 12.7
+# 2 elements written
+l 83/ 84/ 
+
+o _Geometry_26
+
+v 609.6 0 0
+v 609.6 762 0
+# 2 elements written
+l 85/ 86/ 
+
+o _Geometry_27
+
+v 609.6 762 12.7
+v 609.6 762 1.77636e-015
+# 2 elements written
+l 87/ 88/ 
+
+o _Geometry_28
+
+v 609.6 762 0
+v 0 762 0
+# 2 elements written
+l 89/ 90/ 
+
+o _Geometry_29
+
+v 228.6 762 165.1
+v 228.6 762 12.7
+# 2 elements written
+l 91/ 92/ 
+
+o _Geometry_30
+
+v 381 762 165.1
+v 228.6 762 165.1
+# 2 elements written
+l 93/ 94/ 
+
+o _Geometry_31
+
+v 381 762 165.1
+v 381 762 12.7
+# 2 elements written
+l 95/ 96/ 
+
+o _Geometry_32
+
+v 228.6 0 12.7
+v 228.6 -1016 12.7
+# 2 elements written
+l 97/ 98/ 
+
+o _Geometry_33
+
+v 381 -1016 12.7
+v 381 0 12.7
+# 2 elements written
+l 99/ 100/ 
+
+o _Geometry_34
+
+v 228.6 -1016 12.7
+v 381 -1016 12.7
+# 2 elements written
+l 101/ 102/ 
+
+o _Geometry_35
+
+v 228.6 -1016 165.1
+v 228.6 -1016 12.7
+# 2 elements written
+l 103/ 104/ 
+
+o _Geometry_36
+
+v 228.6 762 165.1
+v 228.6 -1016 165.1
+# 2 elements written
+l 105/ 106/ 
+
+o _Geometry_37
+
+v 381 -1016 165.1
+v 381 -1016 12.7
+# 2 elements written
+l 107/ 108/ 
+
+o _Geometry_38
+
+v 228.6 -1016 165.1
+v 381 -1016 165.1
+# 2 elements written
+l 109/ 110/ 
+
+o _Geometry_39
+
+v 381 -1016 165.1
+v 381 762 165.1
+# 2 elements written
+l 111/ 112/ 
