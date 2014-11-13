@@ -41,6 +41,8 @@ img
 {
     border:1px solid wheat;
     margin:10px;
+	width:100%;
+	height:auto;
 }
 @media only screen 
 and (min-width : 701px) {
@@ -52,11 +54,6 @@ and (min-width : 701px) {
 }
 @media only screen 
 and (max-width : 700px) {
-    img
-    {
-        width:100%;
-        height:auto;
-    }
     #content 
     {
         width: 100%;
