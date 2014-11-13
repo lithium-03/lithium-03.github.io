@@ -97,6 +97,7 @@ var camera =
     NEAR,
     FAR);
 var scene = new THREE.Scene();
+var model;
 //camera
 scene.add(camera);
 camera.position.z = defaultCamHeight;
@@ -107,8 +108,8 @@ renderer.setSize(WIDTH, HEIGHT);
 $container.append(renderer.domElement);
 // set up the objects
 loader = new THREE.JSONLoader();
-loader.load("cup.json", function (geometry) {
-    mesh = new THREE.Mesh(geometry, new THREE.MeshNormalMaterial());
+loader.load("models/cup.js", function (geometry, materials) {
+    mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
     scene.add(mesh);
 });
 //point light

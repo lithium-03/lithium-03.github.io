@@ -1,0 +1,66 @@
+﻿body
+{
+    padding:0;
+    margin:0;
+    background-color:#f1f1f1;
+}
+p,li
+{
+    margin:10px;
+    line-height:25px
+}
+#header
+{
+    padding:20px;
+    font-family:'Segoe UI',Verdana,sans-serif;
+    background-color:rgba(200, 100, 100, 0.30);
+}
+#title
+{
+    font-size:30px;
+    color:#ff6a00;
+}
+#nametag
+{
+    font-size:18px;    
+}
+#content
+{
+    padding:5px;
+    font-family:Arial,sans-serif;
+    margin-top:15px;
+}
+.code
+{
+    background-color:rgba(220, 121, 0, 0.2);
+    border-radius:5px;
+    padding:10px;
+    font-family:'Lucida Console';
+}
+img
+{
+    border:1px solid wheat;
+    margin:10px;
+}
+@media only screen 
+and (min-width : 701px) {
+    #content {
+        width: 720px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+@media only screen 
+and (max-width : 700px) {
+    img
+    {
+        width:100%;
+        height:auto;
+    }
+    #content 
+    {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

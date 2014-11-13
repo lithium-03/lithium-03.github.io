@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link href="StyleSheet1.css" rel="stylesheet" type="text/css"/>
+    <meta property="og:title" content="Hide Facebook say thanks videos" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://lithium-03.github.io/" />
+    <meta property="og:image" content="http://lithium-03.github.io/img/dp.jpg" />
+    <meta property="og:site_name" content="The Bored Engineer's Blog" />
+    <meta property="fb:admins" content="lithium-03.nidhin" />
+    <meta http-equiv="Cache-Control" content="must-revalidate" />
+    <meta property="og:description" content="Hide annoying Say thanks videos vanish from everywhere on facebook" />
+    <title></title>
+</head>
+<body>
+    <div id="fb-root"></div>
+    <script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=728631423867691&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    <div id="header">
+        <div id="title">BEB: Bored Engineer's Blog</div>
+        <div id="nametag">By Nidhin</div>
+    </div>
+    <div id="content">
+        <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+        <p>
+            Many of you might have noticed that Facebook has come up with the so called "say thanks" videos.
+        </p>
+        <img src="http://images.thevine.com.au/resources/images/000/289/289905_Screen_Shot_2014_11_13_at_1_21_26_pm_591w.png" />
+        <p>
+            I, along with many others definitely, find this annoying and repetitive. So here's how to make those posts from vanish from Facebook.
+        </p>
+        <ol>
+            <li>
+                Install the <a href="https://chrome.google.com/webstore/detail/custom-javascript-for-web/poakhlngfciodnhlhhgnaaelnpjljija?hl=en">Custom JavaScript for Websites</a> Chrome Extension.
+            </li>
+            <li>
+                Open your <a href="https://www.facebook.com/">Facebook newsfeed</a>.
+            </li>
+            <li>
+                Open the cjs Chrome extension and paste the following code
+                <div class="code">
+key="made you a video to say thanks for being "+
+"such a good friend. You can make your own at";
+function storyHide(){
+post=$("p:contains("+key+")");
+if(post.length>0)
+post.parent().parent().parent().remove();
+}
+$(document).ready(storyHide);
+MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+observer = new MutationObserver(function(mutations, observer){
+    storyHide();
+});
+observer.observe(document, {
+  subtree: true,
+  attributes: true
+});
+</div>
+            </li>
+            <li>
+                Set the "You can inject your own external scripts or predefined one:" option to "jQuery 2.1.0"
+            </li>
+            <li>
+                Check "enable cjs for this host"
+            </li>
+            <li>
+                Click Save.
+                <br />
+                Reload.
+                <br />
+                Done!!
+                <br />
+                <img src="sample.jpg" />
+            </li>
+        </ol>
+        <p>Your Facebook is now devoid of Say Thanks videos. Cheers!!</p>
+        <div class="fb-comments" data-href="http://developers.facebook.com/docs/plugins/comments/" data-numposts="5" data-colorscheme="light"></div>
+    </div>
+</body>
+</html>
