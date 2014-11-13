@@ -45,7 +45,7 @@ img
 	height:auto;
 }
 @media only screen 
-and (min-width : 701px) {
+and (min-width : 721px) {
     #content {
         width: 720px;
         margin-left: auto;
@@ -53,7 +53,7 @@ and (min-width : 701px) {
     }
 }
 @media only screen 
-and (max-width : 700px) {
+and (max-width : 720px) {
     #content 
     {
         width: 100%;
