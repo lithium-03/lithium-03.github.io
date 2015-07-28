@@ -1,0 +1,17 @@
+[
+  {
+    "id": "senpai",
+    "code": "sequential",
+    "access": "admin"
+  },
+  {
+    "id": "kawaii",
+    "code": "differential",
+    "access": "base"
+  },
+  {
+    "id": "arigato",
+    "code": "spiral",
+    "access": "block"
+  }
+]
